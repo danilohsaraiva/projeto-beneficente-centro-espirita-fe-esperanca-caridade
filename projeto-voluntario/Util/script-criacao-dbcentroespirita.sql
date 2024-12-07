@@ -1,5 +1,4 @@
 DROP DATABASE IF EXISTS `dbcentroespirita` ;
-
 -- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -41,6 +40,7 @@ CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Endereco` (
   `uf` CHAR(2) NOT NULL,
   `bairro` VARCHAR(45) NOT NULL,
   `complemento` VARCHAR(45) NULL,
+  `numero` VARCHAR(10) NOT NULL,
   PRIMARY KEY (`id_endereco`))
 ENGINE = InnoDB;
 
@@ -77,7 +77,6 @@ CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Paciente` (
   `cor_raca` VARCHAR(45) NULL,
   `cartao_nascional_saude` VARCHAR(45) NOT NULL,
   `fk_prontuario` INT NULL,
-  `Pacientecol` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id_paciente`),
   INDEX `fk_limitacao_idx` (`fk_limitacao` ASC) VISIBLE,
   INDEX `fk_endereco_idx` (`fk_endereco` ASC) VISIBLE,
@@ -131,10 +130,10 @@ CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Atendimento` (
   `fk_prontuario` INT NOT NULL,
   `tipo_atendimento` TINYINT NOT NULL,
   `prioridade` ENUM("Emergência", "Muito urgente", "Urgente", "Pouco urgente", "Não Urgente") NOT NULL,
-  `motivo_descricao` VARCHAR(45) NOT NULL,
   `status_atendimento` ENUM("Em Aguardo", "Pendente", "Cancelado", "Não Compareceu", "Concluído", "Reaberto") NOT NULL,
   `tratamento` TEXT(150) NULL,
   `diagnostico` TEXT(150) NULL,
+  `observacao` VARCHAR(45) NULL,
   INDEX `fk_prontuario_atendimento_idx` (`fk_prontuario` ASC) VISIBLE,
   PRIMARY KEY (`id_atendimento`),
   CONSTRAINT `fk_prontuario_atendimento`
@@ -206,12 +205,13 @@ CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Psicologo` (
   `fk_endereco` INT NOT NULL,
   `telefone_psicologo` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
-  `crm` VARCHAR(45) NOT NULL,
+  `crp` VARCHAR(45) NOT NULL,
   `uf_registro_crp` CHAR(2) NOT NULL,
   `especialidade` VARCHAR(45) NOT NULL,
   `fk_usuario` INT NULL,
   `rg_psicologo` VARCHAR(45) NOT NULL,
-  `tipo_atendimento` ENUM("Individual", "Casal", "Familiar", "Grupo") NULL,
+  `ur_rg` CHAR(2) NULL,
+  `tipo_atendimento` ENUM("Individual", "Casal", "Familiar", "Grupo") NOT NULL DEFAULT 'Individual',
   PRIMARY KEY (`id_psicologo`),
   INDEX `fk_usuario_idx` (`fk_usuario` ASC) VISIBLE,
   INDEX `fk_endereco_psicologo_idx` (`fk_endereco` ASC) VISIBLE,
@@ -245,6 +245,7 @@ CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Medico` (
   `especialidade_medico` VARCHAR(45) NOT NULL,
   `fk_usuario` INT NOT NULL,
   `rg_medico` VARCHAR(45) NOT NULL,
+  `uf_rg_medico` CHAR(2) NULL,
   PRIMARY KEY (`id_medico`),
   INDEX `fk_usuario_psicologo_idx` (`fk_usuario` ASC) VISIBLE,
   INDEX `fk_endereco_medico_idx` (`fk_endereco` ASC) VISIBLE,
