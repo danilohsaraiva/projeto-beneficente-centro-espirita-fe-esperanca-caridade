@@ -8,7 +8,6 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class TelefoneContatoEmergencia {
     private Long idTelefoneContatoEmergencia;
     private String nomeCompletoEmergencia;

@@ -7,7 +7,7 @@ module com.projetobeneficentecentroespiritafeesperancacaridadejavafx {
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
 
-
+    opens com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model to org.hibernate.orm.core;
     opens com.projetobeneficentecentroespiritafeesperancacaridadejavafx to javafx.fxml;
     exports com.projetobeneficentecentroespiritafeesperancacaridadejavafx;
 }
