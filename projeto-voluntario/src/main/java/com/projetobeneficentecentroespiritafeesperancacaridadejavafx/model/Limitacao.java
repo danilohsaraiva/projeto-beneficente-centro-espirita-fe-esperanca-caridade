@@ -8,7 +8,6 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Limitacao {
     private Long idLimitacacao;
     private boolean ehCognitiva;

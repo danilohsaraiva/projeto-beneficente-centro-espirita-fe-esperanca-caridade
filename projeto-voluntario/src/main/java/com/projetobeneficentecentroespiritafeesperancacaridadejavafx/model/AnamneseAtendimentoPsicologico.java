@@ -8,7 +8,6 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class AnamneseAtendimentoPsicologico {
     private Long idAnamnesePsicologico;
     private String motivoConsultaDescricao;

@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Medico {
     private Long idMedico;
     private String nomeMedico;

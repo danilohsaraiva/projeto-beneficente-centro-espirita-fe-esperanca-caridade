@@ -8,7 +8,6 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Endereco {
     private Long idEndereco;
     private String cep;

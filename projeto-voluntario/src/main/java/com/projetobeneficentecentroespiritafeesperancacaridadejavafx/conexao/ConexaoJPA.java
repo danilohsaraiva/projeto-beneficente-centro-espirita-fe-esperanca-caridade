@@ -1,11 +1,9 @@
-package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.Conexao;
+package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.conexao;
 
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
-
-import java.sql.Connection;
 
 public class ConexaoJPA {
     private static final String PERSISTENCE_UNIT = "Centro-Espirita-Fe-Esperanca-Caridade";

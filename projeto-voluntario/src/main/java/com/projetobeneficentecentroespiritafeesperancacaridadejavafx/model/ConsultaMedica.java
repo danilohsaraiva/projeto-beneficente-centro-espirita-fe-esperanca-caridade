@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class ConsultaMedica {
     private Long idConsultaMedica;
     private LocalDate dataConsulta;

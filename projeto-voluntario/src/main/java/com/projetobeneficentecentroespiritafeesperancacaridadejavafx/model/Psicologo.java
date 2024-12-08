@@ -11,7 +11,6 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Psicologo {
     private Long idPsicologo;
     private String nomePsicologo;

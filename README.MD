@@ -9,6 +9,7 @@ Execute o script "script-criacao-dbcentroespirita.sql" presente na pasta util<br
 
 
 #### Conexão
+- Banco Utilizado (MYSQL)
 - Para realizar a conexão é necessário configurar Váriavéis de Ambiente
 
 | Windows                                                                                                            | Linux/Max                                                                                             |
