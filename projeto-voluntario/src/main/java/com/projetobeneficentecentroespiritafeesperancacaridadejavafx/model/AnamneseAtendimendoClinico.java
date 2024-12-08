@@ -1,6 +1,16 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import java.time.LocalDate;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class AnamneseAtendimendoClinico {
     private Long idAnamneseClinico;
     private String motivoConsultaDescricao;
