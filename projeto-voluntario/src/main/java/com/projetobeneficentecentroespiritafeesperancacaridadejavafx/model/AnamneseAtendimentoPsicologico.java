@@ -1,7 +1,7 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model;
 
 public class AnamneseAtendimentoPsicologico {
-    private long idAnamnesePsicologico;
+    private Long idAnamnesePsicologico;
     private String motivoConsultaDescricao;
     private String dataInicio;
     private String tempoSintomas;           //alterar tipo e nome
