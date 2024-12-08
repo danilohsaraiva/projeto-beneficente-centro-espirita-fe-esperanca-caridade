@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Paciente` (
   `fk_limitacao` INT NULL,
   `fk_endereco` INT NOT NULL,
   `naturalidade` VARCHAR(45) NOT NULL,
-  `nascionalidade` VARCHAR(45) NOT NULL,
+  `nacionalidade` VARCHAR(45) NOT NULL,
   `cor_raca` VARCHAR(45) NULL,
   `cartao_nascional_saude` VARCHAR(45) NOT NULL,
   `fk_prontuario` INT NULL,
