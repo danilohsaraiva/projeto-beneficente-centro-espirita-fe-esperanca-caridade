@@ -20,10 +20,10 @@ USE `dbcentroespirita` ;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Limitacao` (
   `id_limitacao` BIGINT NOT NULL AUTO_INCREMENT,
-  `eh_cognitiva` TINYINT NULL,
-  `eh_locomocao` TINYINT NULL,
-  `eh_visao` TINYINT NULL,
-  `eh_audicao` TINYINT NULL,
+  `eh_cognitiva` BIT NULL,
+  `eh_locomocao` BIT NULL,
+  `eh_visao` BIT NULL,
+  `eh_audicao` BIT NULL,
   `outro_descricao` VARCHAR(45) NULL,
   PRIMARY KEY (`id_limitacao`))
 ENGINE = InnoDB;
@@ -35,7 +35,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Endereco` (
   `id_endereco` BIGINT NOT NULL AUTO_INCREMENT,
   `cep` VARCHAR(8) NOT NULL,
-  `logradouroEndereco` VARCHAR(45) NOT NULL,
+  `logradouro_endereco` VARCHAR(45) NOT NULL,
   `cidade` VARCHAR(45) NOT NULL,
   `uf` CHAR(2) NOT NULL,
   `bairro` VARCHAR(45) NOT NULL,
@@ -46,24 +46,14 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `dbcentroespirita`.`Prontuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Prontuario` (
-  `id_prontuario` BIGINT NOT NULL AUTO_INCREMENT,
-  `data_abertura` DATETIME NOT NULL,
-  PRIMARY KEY (`id_prontuario`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `dbcentroespirita`.`Paciente`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Paciente` (
   `id_paciente` BIGINT NOT NULL AUTO_INCREMENT,
-  `cpfPaciente` VARCHAR(11) NOT NULL,
+  `cpf_paciente` VARCHAR(11) NOT NULL,
   `rg_paciente` VARCHAR(45) NOT NULL,
   `nome_completo_paciente` VARCHAR(50) NOT NULL,
-  `data_nascimento_paciente` DATETIME NOT NULL,
+  `data_nascimento_paciente` DATE NOT NULL,
   `sexo_biologico_paciente` VARCHAR(1) NOT NULL,
   `estado_civil` VARCHAR(45) NOT NULL,
   `genero_paciente` VARCHAR(45) NOT NULL,
@@ -76,11 +66,9 @@ CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Paciente` (
   `nacionalidade` VARCHAR(45) NOT NULL,
   `cor_raca` VARCHAR(45) NULL,
   `cartao_nascional_saude` VARCHAR(45) NOT NULL,
-  `fk_prontuario` BIGINT NULL,
   PRIMARY KEY (`id_paciente`),
   INDEX `fk_limitacao_idx` (`fk_limitacao` ASC) VISIBLE,
   INDEX `fk_endereco_idx` (`fk_endereco` ASC) VISIBLE,
-  INDEX `fk_prontuario_idx` (`fk_prontuario` ASC) VISIBLE,
   CONSTRAINT `fk_limitacao`
     FOREIGN KEY (`fk_limitacao`)
     REFERENCES `dbcentroespirita`.`Limitacao` (`id_limitacao`)
@@ -89,11 +77,6 @@ CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Paciente` (
   CONSTRAINT `fk_endereco`
     FOREIGN KEY (`fk_endereco`)
     REFERENCES `dbcentroespirita`.`Endereco` (`id_endereco`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_prontuario`
-    FOREIGN KEY (`fk_prontuario`)
-    REFERENCES `dbcentroespirita`.`Prontuario` (`id_prontuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -111,14 +94,32 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `dbcentroespirita`.`Prontuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Prontuario` (
+  `id_prontuario` BIGINT NOT NULL,
+  `fk_paciente` BIGINT NOT NULL AUTO_INCREMENT,
+  `data_abertura` DATE NOT NULL,
+  PRIMARY KEY (`id_prontuario`),
+  INDEX `fk_paciente_prontuario_idx` (`fk_paciente` ASC) VISIBLE,
+  CONSTRAINT `fk_paciente_prontuario`
+    FOREIGN KEY (`fk_paciente`)
+    REFERENCES `dbcentroespirita`.`Paciente` (`id_paciente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `dbcentroespirita`.`Usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Usuario` (
   `id_usuario` BIGINT NOT NULL AUTO_INCREMENT,
-  `login` VARCHAR(45) NOT NULL UNIQUE,
+  `login` VARCHAR(45) NOT NULL,
   `senha` VARCHAR(45) NOT NULL,
   `tipo_acesso` CHAR(3) NOT NULL,
-  PRIMARY KEY (`id_usuario`))
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE INDEX `login_UNIQUE` (`login` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
@@ -138,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Atendimento` (
   PRIMARY KEY (`id_atendimento`),
   CONSTRAINT `fk_prontuario_atendimento`
     FOREIGN KEY (`fk_prontuario`)
-    REFERENCES `dbcentroespirita`.`Prontuario` (`id_prontuario`)
+    REFERENCES `dbcentroespirita`.`Prontuario` (`fk_paciente`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -163,7 +164,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`AnamneseAtendimendoClinico` (
   `id_anamnese_clinico` BIGINT NOT NULL AUTO_INCREMENT,
   `motivo_consulta_descricao` VARCHAR(50) NOT NULL,
-  `data_inicio` DATETIME NOT NULL,
+  `tempo_sintomas` VARCHAR(50) NOT NULL,
   `sintomas_assossiados` VARCHAR(50) NOT NULL,
   `tratamento_anteriores` VARCHAR(45) NOT NULL,
   `uso_medicamento` VARCHAR(45) NOT NULL,
@@ -181,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`ContatoEmergenciaPaciente` (
   PRIMARY KEY (`id_contato_emergencia`),
   INDEX `fk_telefone_contato_emergencia_idx` (`fk_telefone_contato_emergencia` ASC) VISIBLE,
   INDEX `fk_paciente_idx` (`fk_paciente` ASC) VISIBLE,
-  CONSTRAINT `fk_paciente`
+  CONSTRAINT `fk_paciente_contato`
     FOREIGN KEY (`fk_paciente`)
     REFERENCES `dbcentroespirita`.`Paciente` (`id_paciente`)
     ON DELETE NO ACTION
