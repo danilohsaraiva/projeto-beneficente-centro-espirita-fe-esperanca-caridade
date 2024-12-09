@@ -1,7 +1,6 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.dao;
 
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.conexao.ConexaoJPA;
-import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.enuns.TipoAcesso;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Usuario;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.dtos.UsuarioDto;
 import jakarta.persistence.EntityManager;
@@ -21,6 +20,7 @@ public class UsuarioDao {
         query.setParameter("senhaUsuario", usuarioDto.getSenha());
 
         usuario = (Usuario) query.getSingleResult();
+        System.out.println("Passei aqui");
 
         manager.close();
 

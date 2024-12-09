@@ -10,7 +10,7 @@ VALUES
 (5, 1, 1, 0, 0, 'Deficiência cognitiva e locomotora');
 
 -- Inserções para a tabela Endereco
-INSERT INTO `Endereco` (`id_endereco`, `cep`, `logradouroEndereco`, `cidade`, `uf`, `bairro`, `complemento`, `numero`)
+INSERT INTO `Endereco` (`id_endereco`, `cep`, `logradouro_endereco`, `cidade`, `uf`, `bairro`, `complemento`, `numero`)
 VALUES
 (1, '12345678', 'Rua das Flores', 'São Paulo', 'SP', 'Centro', 'Apto 101', '10'),
 (2, '87654321', 'Avenida Brasil', 'Rio de Janeiro', 'RJ', 'Copacabana', 'Bloco A', '200'),
@@ -18,23 +18,25 @@ VALUES
 (4, '55667788', 'Avenida Paulista', 'São Paulo', 'SP', 'Bela Vista', NULL, '1500'),
 (5, '99887766', 'Rua Paraná', 'Curitiba', 'PR', 'Centro Cívico', 'Sala 5', '30');
 
--- Inserções para a tabela Prontuario
-INSERT INTO `Prontuario` (`id_prontuario`, `data_abertura`)
-VALUES
-(1, '2024-01-15 10:30:00'),
-(2, '2024-02-10 14:00:00'),
-(3, '2024-03-05 09:15:00'),
-(4, '2024-04-20 11:45:00'),
-(5, '2024-05-18 08:00:00');
+
 
 -- Inserções para a tabela Paciente
-INSERT INTO `Paciente` (`id_paciente`, `cpfPaciente`, `rg_paciente`, `nome_completo_paciente`, `data_nascimento_paciente`, `sexo_biologico_paciente`, `estado_civil`, `genero_paciente`, `email_paciente`, `escolaridade_paciente`, `ocupacao_paciente`, `fk_limitacao`, `fk_endereco`, `naturalidade`, `nacionalidade`, `cor_raca`, `cartao_nascional_saude`, `fk_prontuario`)
+INSERT INTO `Paciente` (`id_paciente`, `cpf_paciente`, `rg_paciente`, `nome_completo_paciente`, `data_nascimento_paciente`, `sexo_biologico_paciente`, `estado_civil`, `genero_paciente`, `email_paciente`, `escolaridade_paciente`, `ocupacao_paciente`, `fk_limitacao`, `fk_endereco`, `naturalidade`, `nacionalidade`, `cor_raca`, `cartao_nascional_saude`)
 VALUES
-(1, '12345678901', 'MG123456', 'João Silva', '1980-05-15 00:00:00', 'M', 'Casado', 'Masculino', 'joao.silva@gmail.com', 'Ensino Médio Completo', 'Operador de Máquinas', 1, 1, 'São Paulo', 'Brasileiro', 'Branco', '123456789012345', 1),
-(2, '23456789012', 'RJ987654', 'Maria Oliveira', '1990-07-20 00:00:00', 'F', 'Solteira', 'Feminino', 'maria.oliveira@gmail.com', 'Ensino Superior Incompleto', 'Estudante', 2, 2, 'Rio de Janeiro', 'Brasileira', 'Parda', '234567890123456', 2),
-(3, '34567890123', 'MG567890', 'Carlos Santos', '1975-03-10 00:00:00', 'M', 'Divorciado', 'Masculino', 'carlos.santos@gmail.com', 'Ensino Técnico Completo', 'Técnico Eletrônico', NULL, 3, 'Belo Horizonte', 'Brasileiro', 'Negro', '345678901234567', 3),
-(4, '45678901234', 'SP678901', 'Ana Costa', '2000-11-25 00:00:00', 'F', 'Solteira', 'Feminino', 'ana.costa@gmail.com', 'Ensino Superior Completo', 'Engenheira', NULL, 4, 'São Paulo', 'Brasileira', 'Branca', '456789012345678', 4),
-(5, '56789012345', 'PR345678', 'Pedro Lima', '1985-06-30 00:00:00', 'M', 'Casado', 'Masculino', 'pedro.lima@gmail.com', 'Ensino Médio Incompleto', 'Motorista', 5, 5, 'Curitiba', 'Brasileiro', 'Amarelo', '567890123456789', 5);
+(1, '12345678901', 'MG123456', 'João Silva', '1980-05-15 00:00:00', 'M', 'Casado', 'Masculino', 'joao.silva@gmail.com', 'Ensino Médio Completo', 'Operador de Máquinas', 1, 1, 'São Paulo', 'Brasileiro', 'Branco', '123456789012345'),
+(2, '23456789012', 'RJ987654', 'Maria Oliveira', '1990-07-20 00:00:00', 'F', 'Solteira', 'Feminino', 'maria.oliveira@gmail.com', 'Ensino Superior Incompleto', 'Estudante', 2, 2, 'Rio de Janeiro', 'Brasileira', 'Parda', '234567890123456'),
+(3, '34567890123', 'MG567890', 'Carlos Santos', '1975-03-10 00:00:00', 'M', 'Divorciado', 'Masculino', 'carlos.santos@gmail.com', 'Ensino Técnico Completo', 'Técnico Eletrônico', NULL, 3, 'Belo Horizonte', 'Brasileiro', 'Negro', '345678901234567'),
+(4, '45678901234', 'SP678901', 'Ana Costa', '2000-11-25 00:00:00', 'F', 'Solteira', 'Feminino', 'ana.costa@gmail.com', 'Ensino Superior Completo', 'Engenheira', NULL, 4, 'São Paulo', 'Brasileira', 'Branca', '456789012345678'),
+(5, '56789012345', 'PR345678', 'Pedro Lima', '1985-06-30 00:00:00', 'M', 'Casado', 'Masculino', 'pedro.lima@gmail.com', 'Ensino Médio Incompleto', 'Motorista', 5, 5, 'Curitiba', 'Brasileiro', 'Amarelo', '567890123456789');
+
+-- Inserções para a tabela Prontuario
+INSERT INTO `Prontuario` (`id_prontuario`, `data_abertura`,`fk_paciente`)
+VALUES
+(1, '2024-01-15 10:30:00',1),
+(2, '2024-02-10 14:00:00',2),
+(3, '2024-03-05 09:15:00',3),
+(4, '2024-04-20 11:45:00',4),
+(5, '2024-05-18 08:00:00',5);
 
 -- Inserções para a tabela TelefoneContatoEmergencia
 INSERT INTO `TelefoneContatoEmergencia` (`id_telefone_contato_emergencia`, `nome_contato_emergencia`, `telefone_contato_emergencia`)
@@ -64,7 +66,7 @@ VALUES
 (5, 'Dr. Fernando Almeida', '56473829100', '1975-01-10 00:00:00', 'M', 5, '(31) 95555-4444', 'fernando.almeida@clinic.com', '11223', 'ES', 'Neurologia', 5, 'ES7654321', 'ES');
 
 -- Inserções para a tabela Endereco
-INSERT INTO `Endereco` (`id_endereco`, `cep`, `logradouroEndereco`, `cidade`, `uf`, `bairro`, `complemento`, `numero`) 
+INSERT INTO `Endereco` (`id_endereco`, `cep`, `logradouro_endereco`, `cidade`, `uf`, `bairro`, `complemento`, `numero`) 
 VALUES 
 (6, '12345001', 'Rua A', 'Cidade A', 'SP', 'Bairro A', 'Casa 10', '100'),
 (7, '12345002', 'Rua B', 'Cidade B', 'RJ', 'Bairro B', 'Apartamento 202', '200'),
@@ -103,7 +105,7 @@ VALUES
 
 -- Inserções para a tabela AnamneseAtendimentoClinico
 INSERT INTO `dbcentroespirita`.`AnamneseAtendimendoClinico` 
-(`id_anamnese_clinico`, `motivo_consulta_descricao`, `data_inicio`, `sintomas_assossiados`, `tratamento_anteriores`, `uso_medicamento`) 
+(`id_anamnese_clinico`, `motivo_consulta_descricao`, `tempo_sintomas`, `sintomas_assossiados`, `tratamento_anteriores`, `uso_medicamento`) 
 VALUES 
 (1, 'Dor abdominal', '2024-12-01 09:00:00', 'Náusea, febre', 'Antibióticos para infecção', 'Omeprazol'),
 (2, 'Hipertensão', '2024-12-02 10:00:00', 'Dor de cabeça, tontura', 'Monitoramento de pressão', 'Losartana'),
