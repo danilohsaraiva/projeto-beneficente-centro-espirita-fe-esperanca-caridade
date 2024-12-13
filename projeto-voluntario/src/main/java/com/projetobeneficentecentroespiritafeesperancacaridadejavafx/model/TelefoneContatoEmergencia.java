@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,11 +19,7 @@ public class TelefoneContatoEmergencia {
     @Column(name = "telefone_contato_emergencia")
     private String telefoneContatoEmergencia;
 
-    @ManyToMany
-    @JoinTable(
-            name = "ContatoEmergenciaPaciente",
-            joinColumns = @JoinColumn(name = "fk_telefone_contato_emergencia"),
-            inverseJoinColumns = @JoinColumn(name = "fk_paciente")
-    )
-    private Set<Paciente> contatos = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "fk_paciente", referencedColumnName = "id_paciente")
+    private Paciente paciente = new Paciente();
 }
