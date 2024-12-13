@@ -47,16 +47,16 @@ public class Paciente {
     @Column(name = "cartao_nascional_saude")
     private String cartaoNascionalSaude;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "fk_limitacao", referencedColumnName = "id_limitacao")
     private Limitacao limitacao;
 
 
-    @ManyToOne
+    @OneToOne()
     @JoinColumn(name = "fk_endereco", referencedColumnName = "id_endereco")
     private Endereco endereco;
 
-    @ManyToMany(mappedBy = "contatos", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<TelefoneContatoEmergencia> telefonesDeEmergencia = new HashSet<>();
 
 }

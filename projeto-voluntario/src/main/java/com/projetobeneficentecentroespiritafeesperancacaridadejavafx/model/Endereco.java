@@ -24,4 +24,6 @@ public class Endereco {
     private String bairro;
     private String complemento;
     private String numero;
+    @OneToOne(mappedBy = "endereco")
+    private Paciente paciente;
 }

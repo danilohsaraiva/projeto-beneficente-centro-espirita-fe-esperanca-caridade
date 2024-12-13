@@ -1,29 +1,32 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.dao;
 
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.conexao.ConexaoJPA;
+import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.erro.UsuarioInvalidoException;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Usuario;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.dtos.UsuarioDto;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import lombok.Data;
 
 @Data
 public class UsuarioDao {
-    public static Usuario buscaUsuarioPorDto(UsuarioDto usuarioDto) {
+    public static Usuario buscaUsuarioPorDto(UsuarioDto usuarioDto) throws UsuarioInvalidoException {
 
         Usuario usuario = null;
-
         EntityManager manager = ConexaoJPA.getEntitityManager();
 
         Query query = manager.createQuery("SELECT u FROM Usuario u WHERE u.login = :loginUsuario AND u.senha = :senhaUsuario");
-        query.setParameter("loginUsuario", usuarioDto.getUsuario());
+        query.setParameter("loginUsuario", usuarioDto.getLogin());
         query.setParameter("senhaUsuario", usuarioDto.getSenha());
 
-        usuario = (Usuario) query.getSingleResult();
-        System.out.println("Passei aqui");
-
-        manager.close();
-
+        try {
+            usuario = (Usuario) query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new UsuarioInvalidoException("Usuário/Senha Inválido!");
+        } finally {
+            manager.close();
+        }
         return usuario;
     }
 
@@ -63,6 +66,7 @@ public class UsuarioDao {
             }
 
             manager.getTransaction().commit();
+
         } catch (Exception e) {
             manager.getTransaction().rollback();
             throw e;
@@ -86,6 +90,7 @@ public class UsuarioDao {
             ehCriado = true;
 
         } catch (Exception e) {
+            manager.getTransaction().rollback();
             e.printStackTrace();
         } finally {
             manager.close();
@@ -107,7 +112,10 @@ public class UsuarioDao {
             System.out.println(ehAtualizado);
 
         } catch (Exception e) {
+            manager.getTransaction().rollback();
             e.printStackTrace();
+        } finally {
+            manager.close();
         }
         return ehAtualizado;
     }

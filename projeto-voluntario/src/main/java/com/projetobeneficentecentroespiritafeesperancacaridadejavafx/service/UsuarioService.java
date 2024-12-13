@@ -2,9 +2,9 @@ package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.service;
 
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.dao.UsuarioDao;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.enuns.TipoAcesso;
+import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.erro.UsuarioInvalidoException;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Usuario;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.dtos.UsuarioDto;
-import jakarta.persistence.NoResultException;
 
 public class UsuarioService {
     public static boolean validaUsuario(UsuarioDto usuarioDto) {
@@ -13,8 +13,8 @@ public class UsuarioService {
         try {
             UsuarioDao.buscaUsuarioPorDto(usuarioDto);
             ehValido = true;
-        } catch (NoResultException e) {
-            System.out.println("Login ou Senha Inválido!");
+        } catch (UsuarioInvalidoException e) {
+            e.printStackTrace();
         }
 
         return ehValido;
