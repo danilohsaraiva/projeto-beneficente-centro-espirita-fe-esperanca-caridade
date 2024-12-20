@@ -20,6 +20,6 @@ public class TelefoneContatoEmergencia {
     private String telefoneContatoEmergencia;
 
     @ManyToOne
-    @JoinColumn(name = "fk_paciente", referencedColumnName = "id_paciente")
+    @JoinColumn(name = "fk_paciente_contato", referencedColumnName = "id_paciente")
     private Paciente paciente = new Paciente();
 }

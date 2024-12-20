@@ -9,25 +9,49 @@ VALUES
 (4, 0, 0, 0, 1, 'Surdez parcial'),
 (5, 1, 1, 0, 0, 'Deficiência cognitiva e locomotora');
 
--- Inserções para a tabela Endereco
-INSERT INTO `Endereco` (`id_endereco`, `cep`, `logradouro_endereco`, `cidade`, `uf`, `bairro`, `complemento`, `numero`)
-VALUES
-(1, '12345678', 'Rua das Flores', 'São Paulo', 'SP', 'Centro', 'Apto 101', '10'),
-(2, '87654321', 'Avenida Brasil', 'Rio de Janeiro', 'RJ', 'Copacabana', 'Bloco A', '200'),
-(3, '11223344', 'Rua Amazonas', 'Belo Horizonte', 'MG', 'Savassi', 'Casa', '55'),
-(4, '55667788', 'Avenida Paulista', 'São Paulo', 'SP', 'Bela Vista', NULL, '1500'),
-(5, '99887766', 'Rua Paraná', 'Curitiba', 'PR', 'Centro Cívico', 'Sala 5', '30');
+-- Inserindo dados na tabela Endereco
+INSERT INTO `dbcentroespirita`.`Endereco` (`cep`, `logradouro_endereco`, `cidade`, `uf`, `bairro`, `complemento`, `numero`)
+VALUES 
+('30130001', 'Rua da Bahia', 'Belo Horizonte', 'MG', 'Centro', NULL, '101'),
+('30140000', 'Avenida Afonso Pena', 'Belo Horizonte', 'MG', 'Centro', NULL, '2000'),
+('04547006', 'Rua Joaquim Floriano', 'São Paulo', 'SP', 'Itaim Bibi', 'Apto 12', '321'),
+('01014000', 'Rua Direita', 'São Paulo', 'SP', 'Sé', NULL, '15'),
+('88010001', 'Rua Felipe Schmidt', 'Florianópolis', 'SC', 'Centro', NULL, '50'),
+('30120060', 'Avenida Amazonas', 'Belo Horizonte', 'MG', 'Prado', 'Sala 501', '220'),
+('40010000', 'Praça da Sé', 'Salvador', 'BA', 'Sé', NULL, '1'),
+('60165082', 'Avenida Santos Dumont', 'Fortaleza', 'CE', 'Centro', NULL, '567'),
+('78048000', 'Rua 24 de Outubro', 'Cuiabá', 'MT', 'Centro', NULL, '300'),
+('64001400', 'Rua Coelho de Resende', 'Teresina', 'PI', 'Centro', 'Casa 5', '150');
 
 
 
--- Inserções para a tabela Paciente
-INSERT INTO `Paciente` (`id_paciente`, `cpf_paciente`, `rg_paciente`, `nome_completo_paciente`, `data_nascimento_paciente`, `sexo_biologico_paciente`, `estado_civil`, `genero_paciente`, `email_paciente`, `escolaridade_paciente`, `ocupacao_paciente`, `fk_limitacao`, `fk_endereco`, `naturalidade`, `nacionalidade`, `cor_raca`, `cartao_nascional_saude`)
-VALUES
-(1, '12345678901', 'MG123456', 'João Silva', '1980-05-15 00:00:00', 'M', 'Casado', 'Masculino', 'joao.silva@gmail.com', 'Ensino Médio Completo', 'Operador de Máquinas', 1, 1, 'São Paulo', 'Brasileiro', 'Branco', '123456789012345'),
-(2, '23456789012', 'RJ987654', 'Maria Oliveira', '1990-07-20 00:00:00', 'F', 'Solteira', 'Feminino', 'maria.oliveira@gmail.com', 'Ensino Superior Incompleto', 'Estudante', 2, 2, 'Rio de Janeiro', 'Brasileira', 'Parda', '234567890123456'),
-(3, '34567890123', 'MG567890', 'Carlos Santos', '1975-03-10 00:00:00', 'M', 'Divorciado', 'Masculino', 'carlos.santos@gmail.com', 'Ensino Técnico Completo', 'Técnico Eletrônico', NULL, 3, 'Belo Horizonte', 'Brasileiro', 'Negro', '345678901234567'),
-(4, '45678901234', 'SP678901', 'Ana Costa', '2000-11-25 00:00:00', 'F', 'Solteira', 'Feminino', 'ana.costa@gmail.com', 'Ensino Superior Completo', 'Engenheira', NULL, 4, 'São Paulo', 'Brasileira', 'Branca', '456789012345678'),
-(5, '56789012345', 'PR345678', 'Pedro Lima', '1985-06-30 00:00:00', 'M', 'Casado', 'Masculino', 'pedro.lima@gmail.com', 'Ensino Médio Incompleto', 'Motorista', 5, 5, 'Curitiba', 'Brasileiro', 'Amarelo', '567890123456789');
+
+-- Inserindo dados na tabela Paciente
+INSERT INTO `dbcentroespirita`.`Paciente` 
+(`cpf_paciente`, `rg_paciente`, `nome_completo_paciente`, `data_nascimento_paciente`, `sexo_biologico_paciente`, 
+ `estado_civil`, `genero_paciente`, `email_paciente`, `escolaridade_paciente`, `ocupacao_paciente`, `fk_limitacao`, 
+ `fk_endereco`, `naturalidade`, `nacionalidade`, `cor_raca`, `cartao_nascional_saude`)
+VALUES 
+('12345678901', 'MG123456', 'João Silva', '1980-05-15', 'M', 'Casado', 'Masculino', 'joao.silva@gmail.com', 
+ 'Ensino Médio Completo', 'Engenheiro', NULL, 1, 'Belo Horizonte', 'Brasileira', 'Branca', '123456789001'),
+('98765432100', 'MG987654', 'Maria Oliveira', '1990-08-20', 'F', 'Solteira', 'Feminino', 'maria.oliveira@hotmail.com', 
+ 'Superior Completo', 'Professora', NULL, 2, 'Belo Horizonte', 'Brasileira', 'Parda', '123456789002'),
+('45678912302', 'SP123456', 'Pedro Santos', '1975-11-10', 'M', 'Divorciado', 'Masculino', 'pedro.santos@yahoo.com', 
+ 'Ensino Médio Completo', 'Comerciante', NULL, 3, 'São Paulo', 'Brasileira', 'Negra', '123456789003'),
+('32165498701', 'SP654321', 'Ana Paula Lima', '1985-03-25', 'F', 'Viúva', 'Feminino', 'ana.paula@gmail.com', 
+ 'Ensino Médio Completo', 'Cabeleireira', NULL, 4, 'São Paulo', 'Brasileira', 'Indígena', '123456789004'),
+('78912345600', 'SC789123', 'Carlos Alberto', '1995-06-12', 'M', 'Solteiro', 'Masculino', 'carlos.alberto@gmail.com', 
+ 'Superior Completo', 'Advogado', NULL, 5, 'Florianópolis', 'Brasileira', 'Branca', '123456789005'),
+('12378945600', 'MG321987', 'Luiza Ferreira', '1992-09-18', 'F', 'Casada', 'Feminino', 'luiza.ferreira@outlook.com', 
+ 'Ensino Superior', 'Nutricionista', NULL, 6, 'Belo Horizonte', 'Brasileira', 'Parda', '123456789006'),
+('65498732101', 'BA456123', 'José Rodrigues', '1960-02-28', 'M', 'Viúvo', 'Masculino', 'jose.rodrigues@gmail.com', 
+ 'Ensino Fundamental Completo', 'Aposentado', NULL, 7, 'Salvador', 'Brasileira', 'Negra', '123456789007'),
+('45612378902', 'CE789654', 'Rita de Cássia', '1978-12-05', 'F', 'Separada', 'Feminino', 'rita.cassia@yahoo.com', 
+ 'Ensino Médio Completo', 'Funcionária Pública', NULL, 8, 'Fortaleza', 'Brasileira', 'Branca', '123456789008'),
+('78965412303', 'MT321456', 'Marcelo Cardoso', '1983-04-15', 'M', 'Casado', 'Masculino', 'marcelo.cardoso@hotmail.com', 
+ 'Ensino Técnico', 'Técnico em TI', NULL, 9, 'Cuiabá', 'Brasileira', 'Parda', '123456789009'),
+('32145678904', 'PI654987', 'Patrícia Nunes', '1997-07-30', 'F', 'Solteira', 'Feminino', 'patricia.nunes@gmail.com', 
+ 'Ensino Médio Completo', 'Estudante', NULL, 10, 'Teresina', 'Brasileira', 'Indígena', '123456789010');
 
 -- Inserções para a tabela Prontuario
 INSERT INTO `Prontuario` (`id_prontuario`, `data_abertura`,`fk_paciente`)
@@ -38,15 +62,19 @@ VALUES
 (4, '2024-04-20 11:45:00',4),
 (5, '2024-05-18 08:00:00',5);
 
--- Inserções para a tabela TelefoneContatoEmergencia
-INSERT INTO `TelefoneContatoEmergencia` (`id_telefone_contato_emergencia`, `nome_contato_emergencia`, `telefone_contato_emergencia`)
-VALUES
-(1, 'Carlos Souza', '(11) 91234-5678'),
-(2, 'Luciana Alves', '(21) 98765-4321'),
-(3, 'Roberto Gomes', '(31) 99876-5432'),
-(4, 'Fernanda Ribeiro', '(41) 98712-3456'),
-(5, 'Patrícia Mendes', '(19) 99321-8765');
-
+INSERT INTO `dbcentroespirita`.`TelefoneContatoEmergencia` 
+(`nome_contato_emergencia`, `telefone_contato_emergencia`, `fk_paciente_contato`)
+VALUES 
+('Carlos Silva', '31987654321', 1),
+('Fernanda Lima', '31976543210', 2),
+('Lucas Rocha', '11987654321', 3),
+('Juliana Souza', '11976543210', 4),
+('Mariana Alves', '48987654321', 5),
+('Paulo Freitas', '31985473210', 6),
+('Tatiana Barros', '71987654321', 7),
+('Cláudio Ramos', '85976543210', 8),
+('Renata Oliveira', '65987654321', 9),
+('Isabela Fonseca', '86976543210', 10);
 -- Inserções para a tabela Usuario
 INSERT INTO `Usuario` (`id_usuario`, `login`, `senha`, `tipo_acesso`)
 VALUES
@@ -65,14 +93,6 @@ VALUES
 (4, 'Dra. Beatriz Costa', '10293847560', '1982-12-30 00:00:00', 'F', 4, '(31) 96666-9999', 'beatriz.costa@clinic.com', '98765', 'RS', 'Dermatologia', 4, 'RS5432109', 'RS'),
 (5, 'Dr. Fernando Almeida', '56473829100', '1975-01-10 00:00:00', 'M', 5, '(31) 95555-4444', 'fernando.almeida@clinic.com', '11223', 'ES', 'Neurologia', 5, 'ES7654321', 'ES');
 
--- Inserções para a tabela Endereco
-INSERT INTO `Endereco` (`id_endereco`, `cep`, `logradouro_endereco`, `cidade`, `uf`, `bairro`, `complemento`, `numero`) 
-VALUES 
-(6, '12345001', 'Rua A', 'Cidade A', 'SP', 'Bairro A', 'Casa 10', '100'),
-(7, '12345002', 'Rua B', 'Cidade B', 'RJ', 'Bairro B', 'Apartamento 202', '200'),
-(8, '12345003', 'Rua C', 'Cidade C', 'MG', 'Bairro C', 'Sobrado 303', '300'),
-(9, '12345004', 'Rua D', 'Cidade D', 'BA', 'Bairro D', 'Casa 404', '400'),
-(10, '12345005', 'Rua E', 'Cidade E', 'ES', 'Bairro E', 'Apartamento 505', '500');
 
 INSERT INTO `Usuario` (`id_usuario`, `login`, `senha`, `tipo_acesso`)
 VALUES

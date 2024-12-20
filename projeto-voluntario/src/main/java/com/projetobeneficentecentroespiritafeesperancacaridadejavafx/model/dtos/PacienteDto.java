@@ -1,11 +1,15 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.dtos;
 
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Paciente;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PacienteDto {
     private String cpfPaciente;
     private String rgPaciente;
@@ -36,6 +40,8 @@ public class PacienteDto {
         paciente.setOcupacaoPaciente(getOcupacaoPaciente());
         paciente.setNacionalidade(getNacionalidade());
         paciente.setCorRaca(getCorRaca());
+        paciente.setNaturalidade(getNaturalidade());
+        paciente.setCartaoNascionalSaude(getCartaoNascionalSaude());
         return paciente;
     }
 }

@@ -89,7 +89,14 @@ CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`TelefoneContatoEmergencia` (
   `id_telefone_contato_emergencia` BIGINT NOT NULL AUTO_INCREMENT,
   `nome_contato_emergencia` VARCHAR(45) NOT NULL,
   `telefone_contato_emergencia` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id_telefone_contato_emergencia`))
+  `fk_paciente_contato` BIGINT NOT NULL,
+  PRIMARY KEY (`id_telefone_contato_emergencia`),
+  INDEX `fk_paciente_contato_idx` (`fk_paciente_contato` ASC) VISIBLE,
+  CONSTRAINT `fk_paciente_contato`
+    FOREIGN KEY (`fk_paciente_contato`)
+    REFERENCES `dbcentroespirita`.`Paciente` (`id_paciente`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -173,35 +180,12 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `dbcentroespirita`.`ContatoEmergenciaPaciente`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`ContatoEmergenciaPaciente` (
-  `id_contato_emergencia` BIGINT NOT NULL AUTO_INCREMENT,
-  `fk_paciente` BIGINT NOT NULL,
-  `fk_telefone_contato_emergencia` BIGINT NOT NULL,
-  PRIMARY KEY (`id_contato_emergencia`),
-  INDEX `fk_telefone_contato_emergencia_idx` (`fk_telefone_contato_emergencia` ASC) VISIBLE,
-  INDEX `fk_paciente_idx` (`fk_paciente` ASC) VISIBLE,
-  CONSTRAINT `fk_paciente_contato`
-    FOREIGN KEY (`fk_paciente`)
-    REFERENCES `dbcentroespirita`.`Paciente` (`id_paciente`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_telefone_contato_emergencia`
-    FOREIGN KEY (`fk_telefone_contato_emergencia`)
-    REFERENCES `dbcentroespirita`.`TelefoneContatoEmergencia` (`id_telefone_contato_emergencia`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `dbcentroespirita`.`Psicologo`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Psicologo` (
   `id_psicologo` BIGINT NOT NULL AUTO_INCREMENT,
   `nome_psicologo` VARCHAR(45) NOT NULL,
-  `data_nascimento_profissional` DATETIME NOT NULL,
+  `data_nascimento_profissional` DATE NOT NULL,
   `sexo_psicologo` VARCHAR(45) NOT NULL,
   `fk_endereco` BIGINT NOT NULL,
   `telefone_psicologo` VARCHAR(45) NOT NULL,
@@ -236,7 +220,7 @@ CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Medico` (
   `id_medico` BIGINT NOT NULL AUTO_INCREMENT,
   `nome_medico` VARCHAR(45) NOT NULL,
   `cpf_medico` VARCHAR(11) NOT NULL,
-  `data_nascimento_medico` DATETIME NOT NULL,
+  `data_nascimento_medico` DATE NOT NULL,
   `sexo` CHAR(1) NOT NULL,
   `fk_endereco` BIGINT NOT NULL,
   `telefone_medico` VARCHAR(45) NOT NULL,
@@ -268,7 +252,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`ConsultaMedica` (
   `id_consulta_medica` BIGINT NOT NULL AUTO_INCREMENT,
-  `data_consulta` DATETIME NOT NULL,
+  `data_consulta` DATE NOT NULL,
   `fk_medico_plantao` BIGINT NOT NULL,
   PRIMARY KEY (`id_consulta_medica`),
   INDEX `fk_medico_plantao_idx` (`fk_medico_plantao` ASC) VISIBLE,

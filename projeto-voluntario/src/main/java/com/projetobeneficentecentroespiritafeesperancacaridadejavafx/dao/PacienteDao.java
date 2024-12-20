@@ -1,6 +1,7 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.dao;
 
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.conexao.ConexaoJPA;
+import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Endereco;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Paciente;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.TelefoneContatoEmergencia;
 import jakarta.persistence.EntityManager;
@@ -54,6 +55,26 @@ public class PacienteDao {
         return ehAdicionado;
     }
 
+    public static void adicionaPacienteComEndereco(Paciente paciente, Endereco endereco) {
+        EntityManager manager = ConexaoJPA.getEntitityManager();
+
+        try {
+            manager.getTransaction().begin();
+            manager.persist(endereco);
+
+            manager.flush();
+            paciente.setEndereco(endereco);
+
+            manager.persist(paciente);
+            manager.getTransaction().commit();
+        } catch (Exception e) {
+            manager.getTransaction().rollback();
+
+        } finally {
+          manager.close();
+        }
+    }
+
     public static List<TelefoneContatoEmergencia> buscaListaContatoEmergencia(Long idPaciente) {
         List<TelefoneContatoEmergencia> telefonesEmergencia;
         EntityManager manager = ConexaoJPA.getEntitityManager();
@@ -70,5 +91,96 @@ public class PacienteDao {
             manager.close();
         }
         return telefonesEmergencia;
+    }
+
+    public static boolean adicionaTelefoneContatoEmergencia(Long idPaciente, TelefoneContatoEmergencia telefoneContatoEmergencia) {
+        boolean ehAdicionado = false;
+
+        EntityManager manager = ConexaoJPA.getEntitityManager();
+
+        try {
+            manager.getTransaction().begin();
+
+            Paciente paciente = manager.find(Paciente.class, idPaciente);
+
+            if (paciente != null) {
+                telefoneContatoEmergencia.setPaciente(paciente);
+                manager.persist(telefoneContatoEmergencia);
+                manager.getTransaction().commit();
+                ehAdicionado = true;
+            } else {
+                System.out.println("Paciente com ID " + idPaciente + " não encontrado.");
+                manager.getTransaction().rollback();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            manager.close();
+        }
+
+        return ehAdicionado;
+    }
+
+    public static boolean removeTelefoneContatoEmergencia(Long idPaciente, Long idTelefoneContatoEmergencia) {
+        boolean ehRemovido = false;
+
+        EntityManager manager = ConexaoJPA.getEntitityManager();
+
+        try {
+            manager.getTransaction().begin();
+
+            Paciente paciente = manager.find(Paciente.class, idPaciente);
+
+            if (paciente != null) {
+                TelefoneContatoEmergencia telefoneContatoEmergencia = manager.find(TelefoneContatoEmergencia.class, idTelefoneContatoEmergencia);
+
+                if (telefoneContatoEmergencia != null && telefoneContatoEmergencia.getPaciente().getIdPaciente().equals(paciente.getIdPaciente())) {
+                    manager.getTransaction().begin();
+                    manager.remove(telefoneContatoEmergencia);
+                    manager.getTransaction().commit();
+                    ehRemovido = true;
+                }
+            } else {
+                System.out.println("Paciente com ID " + idPaciente + " não encontrado.");
+                manager.getTransaction().rollback();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+        } finally {
+            manager.close();
+        }
+
+        return ehRemovido;
+    }
+
+    private static boolean adicionaEndereco(Long idPaciente, Endereco endereco) {
+        boolean ehAdicionado = false;
+            EntityManager manager = ConexaoJPA.getEntitityManager();
+
+        try {
+            Paciente paciente = manager.find(Paciente.class, idPaciente);
+
+            if(paciente != null) {
+                endereco.setPaciente(paciente);
+                manager.getTransaction().begin();
+                manager.persist(endereco);
+                manager.getTransaction().commit();
+                ehAdicionado = true;
+            }
+
+        } catch (Exception e) {
+            if(manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }
+
+        return ehAdicionado;
     }
 }

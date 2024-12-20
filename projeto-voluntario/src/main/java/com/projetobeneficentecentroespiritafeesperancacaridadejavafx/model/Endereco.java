@@ -26,4 +26,19 @@ public class Endereco {
     private String numero;
     @OneToOne(mappedBy = "endereco")
     private Paciente paciente;
+
+    @Override
+    public String toString() {
+        return "Endereco{" +
+                "idEndereco=" + idEndereco +
+                ", cep='" + cep + '\'' +
+                ", logradouroEndereco='" + logradouroEndereco + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", uf='" + uf + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", complemento='" + complemento + '\'' +
+                ", numero='" + numero + '\'' +
+                ", pacienteId=" + (paciente != null ? paciente.getIdPaciente(): "null") +
+                '}';
+    }
 }
