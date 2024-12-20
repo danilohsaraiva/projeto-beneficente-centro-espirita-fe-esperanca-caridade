@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetobeneficentecentroespiritafeesperancacaridadejavafx.controller.PrincipalController">
+    <top>
+        <MenuBar accessibleRole="BUTTON" prefHeight="5.0" prefWidth="1175.0" BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Paciente">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Buscar" />
+                        <MenuItem mnemonicParsing="false" onAction="#cadastroPaciente" text="Cadastrar" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Atendimento">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Agendar" />
+                        <MenuItem mnemonicParsing="false" text="Visualizar Agendamento" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Atendimento Médico">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Visualizar Consultas Agendadas" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Atendimento Psicológico">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Visualizar Consultas Agendadas" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Sobre" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+    </center>
+    <bottom>
+        <HBox alignment="BOTTOM_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+        </HBox>
+    </bottom>
+</BorderPane>

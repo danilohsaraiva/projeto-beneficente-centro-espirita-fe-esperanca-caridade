@@ -7,17 +7,19 @@ import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Usuar
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.dtos.UsuarioDto;
 
 public class UsuarioService {
-    public static boolean validaUsuario(UsuarioDto usuarioDto) {
-        boolean ehValido = false;
+    public static Usuario validaUsuario(UsuarioDto usuarioDto) {
+        Usuario usuario;
 
         try {
-            UsuarioDao.buscaUsuarioPorDto(usuarioDto);
-            ehValido = true;
+            usuario = UsuarioDao.buscaUsuarioPorDto(usuarioDto);
+            return usuario;
+
         } catch (UsuarioInvalidoException e) {
+            usuario = null;
             e.printStackTrace();
         }
 
-        return ehValido;
+        return usuario;
     }
 
     public static boolean deletaUsuario(Long id) {
