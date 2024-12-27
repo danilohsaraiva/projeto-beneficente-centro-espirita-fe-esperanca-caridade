@@ -26,6 +26,7 @@ public class ViewManager {
 
     private final Map<String, Scene> scenes = new HashMap<>();
     private final Map<String, Object> controllers = new HashMap<>();
+    private final Map<String, Parent> parents = new HashMap<>();
 
     public Object getController(TipoTela tipoTela) {
         return controllers.get(tipoTela.toString());
@@ -49,10 +50,13 @@ public class ViewManager {
         controllers.put(tipoTela.toString(), controller);
 
         scenes.put(tipoTela.toString(), new Scene(parent));
+
+        parents.put(tipoTela.toString(), parent);
     }
 
     public void showScreen(TipoTela tipo) {
         Scene scene = scenes.get(tipo.toString());
+
 
         if (scene != null) {
             sceneMain.setScene(scene);

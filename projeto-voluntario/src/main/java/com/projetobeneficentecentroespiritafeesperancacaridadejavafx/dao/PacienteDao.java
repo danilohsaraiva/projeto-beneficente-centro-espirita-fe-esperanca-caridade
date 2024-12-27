@@ -1,26 +1,47 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.dao;
 
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.conexao.ConexaoJPA;
-import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Endereco;
-import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Paciente;
-import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.TelefoneContatoEmergencia;
+import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.Query;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 public class PacienteDao {
 
+    public static List<Paciente> buscaPacientes(String nome) {
+
+        List<Paciente> pacientes = new ArrayList<>();
+
+        EntityManager manager = ConexaoJPA.getEntitityManager();
+        try {
+        Query query = manager.createQuery("SELECT p FROM Paciente p WHERE p.nomeCompletoPaciente  LIKE :nome");
+        query.setParameter("nome", "%" + nome + "%");
+
+
+            pacientes = query.getResultList();
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar pacientes por nome");
+        } finally {
+            if(manager != null) {
+                manager.close();
+            }
+        }
+
+        return pacientes;
+    }
+
     public static Paciente buscaPacientePorCPF(String cpf) {
         Paciente paciente = null;
 
         EntityManager manager = ConexaoJPA.getEntitityManager();
 
-        Query query = manager.createQuery("SELECT p FROM Paciente p WHERE p.cpfPaciente = : cpf");
+        Query query = manager.createQuery("SELECT p FROM Paciente p LEFT JOIN FETCH p.telefonesDeEmergencia WHERE p.cpfPaciente = :cpf");
         query.setParameter("cpf", cpf);
 
         try {
@@ -63,6 +84,20 @@ public class PacienteDao {
             manager.persist(endereco);
 
             manager.flush();
+
+            if(paciente.getLimitacao() != null) {
+                Limitacao limitacao = paciente.getLimitacao();
+                manager.persist(limitacao);
+                manager.flush();
+            }
+
+
+                Prontuario prontuario = new Prontuario();
+                prontuario.setDataAbertura(LocalDate.now());
+
+                prontuario.setPacienteProntuario(paciente);
+                paciente.setProntuario(prontuario);
+
             paciente.setEndereco(endereco);
 
             manager.persist(paciente);
