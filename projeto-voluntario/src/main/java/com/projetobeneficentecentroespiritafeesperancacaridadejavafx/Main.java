@@ -1,7 +1,9 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx;
 
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.controller.MainController;
+import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.dao.PacienteDao;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.enuns.TipoTela;
+import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Paciente;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Usuario;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.view.ViewManager;
 import javafx.application.Application;
@@ -14,13 +16,15 @@ import javafx.stage.Stage;
 import lombok.Data;
 
 import java.io.IOException;
+import java.util.List;
 
 @Data
 public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-
+        List<Paciente> pacientes = PacienteDao.buscaPacientes("a");
+        System.out.println(pacientes);
 
         try {
             ViewManager viewManager = ViewManager.getInstance();
@@ -29,6 +33,7 @@ public class Main extends Application {
             viewManager.addScreen(TipoTela.CADASTRO_PACIENTE,"cadastro-paciente-view.fxml");
             viewManager.addScreen(TipoTela.PRINCIPAL, "principal-view.fxml");
             viewManager.addScreen(TipoTela.LOGIN,"hello-view.fxml");
+            viewManager.addScreen(TipoTela.BUSCA_PACIENTE, "busca-paciente.fxml");
 
 
 
@@ -38,6 +43,8 @@ public class Main extends Application {
         }
 
         ViewManager.getInstance().showScreen(TipoTela.LOGIN);
+        ViewManager.getInstance().getSceneMain().setTitle("LOGIN");
+        ViewManager.getInstance().getSceneMain().setResizable(false);
     }
 
     public static void main(String[] args) {

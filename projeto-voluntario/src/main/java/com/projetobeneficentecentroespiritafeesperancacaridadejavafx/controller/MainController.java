@@ -40,6 +40,9 @@ public class MainController {
             Usuario usuario = UsuarioService.validaUsuario(usuarioDto);
             if (usuario != null) {
                 ViewManager.getInstance().showScreen(TipoTela.PRINCIPAL);
+                ViewManager.getInstance().getSceneMain().setTitle("Bem Vindo!");
+                ViewManager.getInstance().getSceneMain().setResizable(true);
+                ViewManager.getInstance().getSceneMain().setMaximized(true);
             }
         } catch (Exception e) {
             System.out.println("Usuário/Senha Inválidos!");

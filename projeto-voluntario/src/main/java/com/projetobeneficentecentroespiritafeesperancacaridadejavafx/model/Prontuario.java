@@ -21,7 +21,7 @@ public class Prontuario {
     @Column(name = "id_prontuario")
     private Long idProntuario;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "fk_paciente", referencedColumnName = "id_paciente")
     private Paciente pacienteProntuario;
 

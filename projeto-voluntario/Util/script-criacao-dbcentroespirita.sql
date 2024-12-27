@@ -104,8 +104,8 @@ ENGINE = InnoDB;
 -- Table `dbcentroespirita`.`Prontuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbcentroespirita`.`Prontuario` (
-  `id_prontuario` BIGINT NOT NULL,
-  `fk_paciente` BIGINT NOT NULL AUTO_INCREMENT,
+  `id_prontuario` BIGINT NOT NULL AUTO_INCREMENT,
+  `fk_paciente` BIGINT NOT NULL,
   `data_abertura` DATE NOT NULL,
   PRIMARY KEY (`id_prontuario`),
   INDEX `fk_paciente_prontuario_idx` (`fk_paciente` ASC) VISIBLE,

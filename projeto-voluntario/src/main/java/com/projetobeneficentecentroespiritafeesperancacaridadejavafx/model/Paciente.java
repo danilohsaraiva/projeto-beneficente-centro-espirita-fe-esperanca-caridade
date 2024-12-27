@@ -1,10 +1,7 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -15,6 +12,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@EqualsAndHashCode
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,15 +46,30 @@ public class Paciente {
     private String cartaoNascionalSaude;
 
     @OneToOne
+    @EqualsAndHashCode.Exclude
     @JoinColumn(name = "fk_limitacao", referencedColumnName = "id_limitacao")
     private Limitacao limitacao;
 
 
     @OneToOne()
+    @EqualsAndHashCode.Exclude
     @JoinColumn(name = "fk_endereco", referencedColumnName = "id_endereco")
     private Endereco endereco;
 
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @EqualsAndHashCode.Exclude
     private Set<TelefoneContatoEmergencia> telefonesDeEmergencia = new HashSet<>();
+
+    @OneToOne(mappedBy = "pacienteProntuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Prontuario prontuario;
+
+    @Override
+    public String toString() {
+        return "Paciente{" +
+                "idPaciente=" + idPaciente +
+                ", nomeCompletoPaciente='" + nomeCompletoPaciente + '\'' +
+                ", cpfPaciente='" + cpfPaciente + '\'' +
+                '}';
+    }
 
 }

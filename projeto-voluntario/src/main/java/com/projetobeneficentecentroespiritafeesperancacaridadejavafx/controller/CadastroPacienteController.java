@@ -2,8 +2,10 @@ package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.controller
 
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.dao.PacienteDao;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Endereco;
+import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Limitacao;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Paciente;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.dtos.EnderecoDto;
+import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.dtos.LimitacaoDto;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.dtos.PacienteDto;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.util.MascaraCPF;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.util.MascaraCelular;
@@ -13,6 +15,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -46,13 +49,37 @@ public class CadastroPacienteController implements Initializable {
     private Button btnValidarCep;
 
     @FXML
+    private CheckBox cbAudicao;
+
+    @FXML
+    private CheckBox cbCognitiva;
+
+    @FXML
+    private CheckBox cbLocomocao;
+
+    @FXML
+    private ComboBox<String> cbRaca;
+
+    @FXML
+    private CheckBox cbSim;
+
+    @FXML
     private ComboBox<String> cbUfEndereco;
 
     @FXML
     private ComboBox<String> cbUfRg;
 
     @FXML
+    private CheckBox cbVisao;
+
+    @FXML
     private DatePicker dpDataNascimento;
+
+    @FXML
+    private HBox hBoxDeficiencia;
+
+    @FXML
+    private HBox hBoxDeficienciaOutros;
 
     @FXML
     private Label lbBairro;
@@ -91,15 +118,6 @@ public class CadastroPacienteController implements Initializable {
     private Label lbGenero;
 
     @FXML
-    private Label lbIDescricaoEmergencia1;
-
-    @FXML
-    private Label lbIDescricaoEmergencia2;
-
-    @FXML
-    private Label lbIDescricaoEmergencia3;
-
-    @FXML
     private Label lbNacionalidade;
 
     @FXML
@@ -121,6 +139,9 @@ public class CadastroPacienteController implements Initializable {
     private Label lbOutroContatoEmergencia;
 
     @FXML
+    private Label lbQuestionaDeficiencia;
+
+    @FXML
     private Label lbRaca;
 
     @FXML
@@ -136,13 +157,7 @@ public class CadastroPacienteController implements Initializable {
     private Label lbTelefoneContatoEmergencia;
 
     @FXML
-    private Label lbTituloDescricaoEmergenciaItem1;
-
-    @FXML
-    private Label lbTituloDescricaoEmergenciaItem2;
-
-    @FXML
-    private Label lbTituloDescricaoEmergenciaItem3;
+    private Label lbTipoDeficiencia;
 
     @FXML
     private Label lbUfCidade;
@@ -178,6 +193,9 @@ public class CadastroPacienteController implements Initializable {
     private TextField tfCpf;
 
     @FXML
+    private TextField tfDeficienciaOutro;
+
+    @FXML
     private TextField tfEmail;
 
     @FXML
@@ -188,6 +206,9 @@ public class CadastroPacienteController implements Initializable {
 
     @FXML
     private TextField tfEstadoCivil;
+
+    @FXML
+    private TextField tfGenero;
 
     @FXML
     private TextField tfNacionalidade;
@@ -218,12 +239,6 @@ public class CadastroPacienteController implements Initializable {
 
     @FXML
     private TextField tfTelefoneEmergencia;
-
-    @FXML
-    private TextField tfGenero;
-
-    @FXML
-    private ComboBox<String> cbRaca;
 
     @FXML
     public void add(javafx.scene.input.MouseEvent mouseEvent) {
@@ -266,6 +281,17 @@ public class CadastroPacienteController implements Initializable {
 
             Paciente paciente = pacienteDto.toModel();
 
+            if(cbSim.isSelected()) {
+                LimitacaoDto limitacaoDto = new LimitacaoDto();
+                limitacaoDto.setEhAudicao(cbAudicao.isSelected());
+                limitacaoDto.setEhLocomocao(cbLocomocao.isSelected());
+                limitacaoDto.setEhVisao(cbVisao.isSelected());
+                limitacaoDto.setEhCognitiva(cbCognitiva.isSelected());
+                limitacaoDto.setOutroDescricao(tfDeficienciaOutro.getText());
+
+                Limitacao limitacao = limitacaoDto.toModel();
+            }
+
             PacienteDao.adicionaPacienteComEndereco(paciente, endereco);
 
 
@@ -287,5 +313,31 @@ public class CadastroPacienteController implements Initializable {
         MascaraCelular.applyPhoneMask(tfTelefone);
         MascaraCelular.applyPhoneMask(tfTelefoneEmergencia);
         ValidaInput.somenteNumeros(tfNumero);
+
+
+        hBoxDeficiencia.setVisible(false);
+        hBoxDeficiencia.setManaged(false);
+        hBoxDeficienciaOutros.setVisible(false);
+        hBoxDeficienciaOutros.setManaged(false);
+
+        System.out.println("Inicializando controlador...");
+
+        if (cbSim == null) {
+            System.out.println("Erro: cbSim está nulo!");
+        }
+        if (hBoxDeficiencia == null) {
+            System.out.println("Erro: hBoxDeficiencia está nulo!");
+        }
+        if (hBoxDeficienciaOutros == null) {
+            System.out.println("Erro: hBoxDeficienciaOutros está nulo!");
+        }
+
+        // Configuração do listener
+        cbSim.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            hBoxDeficiencia.setVisible(newValue);
+            hBoxDeficiencia.setManaged(newValue);
+            hBoxDeficienciaOutros.setVisible(newValue);
+            hBoxDeficienciaOutros.setManaged(newValue);
+        });
     }
 }

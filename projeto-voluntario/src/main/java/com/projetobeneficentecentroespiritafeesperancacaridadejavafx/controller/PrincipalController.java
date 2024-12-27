@@ -2,12 +2,13 @@ package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.controller
 
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.enuns.TipoTela;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Usuario;
-import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.view.PrincipalView;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.view.ViewManager;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import lombok.Data;
 
 import java.io.IOException;
@@ -15,20 +16,27 @@ import java.io.IOException;
 @Data
 public class PrincipalController {
 
-    PrincipalView principalView;
     private Usuario usuario;
     private Parent layoutCadastroPaciente;
     private Parent pacienteBusca;
 
-    public void setPrincipalView(PrincipalView principalView) {
-        this.principalView = principalView;
-    }
+
 
 
 
     @FXML
     void cadastroPaciente(ActionEvent event) throws IOException {
-        ViewManager viewManager = ViewManager.getInstance();
-        viewManager.showScreen(TipoTela.CADASTRO_PACIENTE);
+        ViewManager.getInstance().showScreen(TipoTela.CADASTRO_PACIENTE);
+        Stage stage = (Stage) ViewManager.getInstance().getSceneMain().getScene().getWindow();
+        ViewManager.getInstance().getSceneMain().setTitle("CADASTRO PACIENTE");
+
+
+    }
+
+    @FXML
+    void buscaPaciente(ActionEvent event) {
+        ViewManager.getInstance().showScreen(TipoTela.BUSCA_PACIENTE);
+        ViewManager.getInstance().getSceneMain().setTitle("BUSCAR PACIENTE");
+        ViewManager.getInstance().getSceneMain().setMaximized(true);
     }
 }
