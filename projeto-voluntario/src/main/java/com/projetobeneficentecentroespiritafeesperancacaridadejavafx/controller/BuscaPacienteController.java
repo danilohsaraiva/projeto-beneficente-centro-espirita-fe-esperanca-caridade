@@ -1,17 +1,21 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.controller;
 
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.dao.PacienteDao;
+import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.enuns.TipoTela;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Paciente;
+import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.view.ViewManager;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -66,6 +70,7 @@ public class BuscaPacienteController implements Initializable {
         });
     }
 
+
     private void atualizaListaPaciente(String filtro) {
         if (filtro == null || filtro.trim().isEmpty()) {
             listaPacientes.clear();
@@ -75,5 +80,25 @@ public class BuscaPacienteController implements Initializable {
             listaPacientes.setAll(pacientes);
         }
 
+    }
+
+    @FXML
+    void telaCadastroPaciente(ActionEvent event) throws IOException {
+        ViewManager.getInstance().showScreen(TipoTela.CADASTRO_PACIENTE);
+        ViewManager.getInstance().getSceneMain().setTitle("CADASTRO PACIENTE");
+
+
+    }
+
+    @FXML
+    void telaBuscaPaciente(ActionEvent event) {
+        ViewManager.getInstance().showScreen(TipoTela.BUSCA_PACIENTE);
+        ViewManager.getInstance().getSceneMain().setTitle("BUSCAR PACIENTE");
+    }
+
+    @FXML
+    void telaAdmin(ActionEvent event) {
+        ViewManager.getInstance().showScreen(TipoTela.ADMIN);
+        ViewManager.getInstance().getSceneMain().setTitle("ADMIN");
     }
 }

@@ -8,6 +8,8 @@ module com.projetobeneficentecentroespiritafeesperancacaridadejavafx {
     requires org.hibernate.orm.core;
 
     opens com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model to org.hibernate.orm.core;
+    opens com.projetobeneficentecentroespiritafeesperancacaridadejavafx.converter to org.hibernate.orm.core;
+
     opens com.projetobeneficentecentroespiritafeesperancacaridadejavafx to javafx.fxml;
     opens com.projetobeneficentecentroespiritafeesperancacaridadejavafx.controller to javafx.fxml;
     opens com.projetobeneficentecentroespiritafeesperancacaridadejavafx.service to javafx.fxml;

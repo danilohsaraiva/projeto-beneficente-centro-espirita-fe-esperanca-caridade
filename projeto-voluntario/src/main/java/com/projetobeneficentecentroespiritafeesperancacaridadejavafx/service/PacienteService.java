@@ -16,6 +16,7 @@ public class PacienteService {
     }*/
 
 
+
     public static boolean adicionaPaciente(PacienteDto pacienteDto) {
         return PacienteDao.adicionaPaciente(pacienteDto.toModel());
     }

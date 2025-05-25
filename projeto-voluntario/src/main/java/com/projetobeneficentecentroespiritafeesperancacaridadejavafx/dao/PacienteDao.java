@@ -19,14 +19,17 @@ public class PacienteDao {
         List<Paciente> pacientes = new ArrayList<>();
 
         EntityManager manager = ConexaoJPA.getEntitityManager();
+
         try {
-        Query query = manager.createQuery("SELECT p FROM Paciente p WHERE p.nomeCompletoPaciente  LIKE :nome");
-        query.setParameter("nome", "%" + nome + "%");
+        Query query = manager.createQuery("SELECT p FROM Paciente p WHERE LOWER(p.nomeCompletoPaciente)  LIKE LOWER(:nome)");
+        query.setParameter("nome", "%" + nome.toLowerCase() + "%");
 
 
             pacientes = query.getResultList();
+
         } catch (Exception e) {
             System.out.println("Erro ao buscar pacientes por nome");
+            e.printStackTrace();
         } finally {
             if(manager != null) {
                 manager.close();
