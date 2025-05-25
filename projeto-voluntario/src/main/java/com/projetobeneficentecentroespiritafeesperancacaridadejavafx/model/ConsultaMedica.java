@@ -1,9 +1,6 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,13 +12,14 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class ConsultaMedica {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_consulta_medica")
     private Long idConsultaMedica;
     @Column(name="data_consulta")
-    private Date dataConsulta;
+    private LocalDate dataConsulta;
     private String status;
     @Column(name="fk_medico_plantao")
     private Long fkMedicoPlantao;
