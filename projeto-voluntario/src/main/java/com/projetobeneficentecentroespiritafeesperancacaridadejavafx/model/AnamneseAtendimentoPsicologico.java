@@ -1,19 +1,18 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Entity
 public class AnamneseAtendimentoPsicologico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +25,7 @@ public class AnamneseAtendimentoPsicologico {
     private String comorbidades;
     private String sintomas;
     @Column(name="tempo_sinstomas")
-    private Date tempoSintomas;           //alterar tipo e nome
+    private LocalDate tempoSintomas;           //alterar tipo e nome
     @Column(name="tratamentos_anteriores")
     private String tratamentosAnteriores;
     @Column(name="medicamentos_uso")
