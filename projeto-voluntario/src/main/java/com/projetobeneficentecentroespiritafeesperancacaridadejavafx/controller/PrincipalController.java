@@ -25,18 +25,35 @@ public class PrincipalController {
 
 
     @FXML
-    void cadastroPaciente(ActionEvent event) throws IOException {
+    void telaCadastroPaciente(ActionEvent event) throws IOException {
         ViewManager.getInstance().showScreen(TipoTela.CADASTRO_PACIENTE);
-        Stage stage = (Stage) ViewManager.getInstance().getSceneMain().getScene().getWindow();
         ViewManager.getInstance().getSceneMain().setTitle("CADASTRO PACIENTE");
 
 
     }
 
     @FXML
-    void buscaPaciente(ActionEvent event) {
+    void telaBuscaPaciente(ActionEvent event) {
         ViewManager.getInstance().showScreen(TipoTela.BUSCA_PACIENTE);
         ViewManager.getInstance().getSceneMain().setTitle("BUSCAR PACIENTE");
-        ViewManager.getInstance().getSceneMain().setMaximized(true);
+    }
+
+    @FXML
+    void telaAdmin(ActionEvent event) {
+        ViewManager.getInstance().showScreen(TipoTela.ADMIN);
+        ViewManager.getInstance().getSceneMain().setTitle("ADMINISTRADOR");
+    }
+
+    @FXML
+    void telaAgendar(ActionEvent event) throws IOException{
+        ViewManager.getInstance().changeScreen(TipoTela.AGENDAMENTO,"AGENDAMENTO");
+        ViewManager.getInstance().getSceneMain().setTitle("AGENDAMENTO");
+    }
+
+
+    @FXML
+    void visualizarAtendimentos(ActionEvent event) {
+        ViewManager.getInstance().changeScreen(TipoTela.AGENDAMENTOS, "AGENDAMENTOS");
+        ViewManager.getInstance().getSceneMain().setTitle("AGENDAMENTOS");
     }
 }

@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="700.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.projetobeneficentecentroespiritafeesperancacaridadejavafx.controller.AdminController">
+   <top>
+      <MenuBar accessibleRole="BUTTON" prefHeight="5.0" prefWidth="1175.0" BorderPane.alignment="CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" text="Paciente">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#telaBuscaPaciente" text="Buscar" />
+                  <MenuItem mnemonicParsing="false" onAction="#telaCadastroPaciente" text="Cadastrar" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Atendimento">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Agendar" />
+                  <MenuItem mnemonicParsing="false" text="Visualizar Agendamento" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Atendimento Médico">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Visualizar Consultas Agendadas" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Atendimento Psicológico">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Visualizar Consultas Agendadas" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Admin">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#telaAdmin" text="Gestão" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Sobre" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </top>
+   <bottom>
+      <HBox alignment="BOTTOM_RIGHT" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <children>
+            <Button fx:id="btnConfirmar" mnemonicParsing="false" text="Confirmar">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnCancelar" mnemonicParsing="false" text="Cancelar">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnAdicionar" mnemonicParsing="false" onMouseClicked="#adicionaProfissional" text="Adicionar">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="btnEditar" mnemonicParsing="false" onMouseClicked="#edita" text="Editar">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <left>
+      <VBox maxWidth="150.0" minWidth="-Infinity" prefHeight="575.0" prefWidth="150.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lbMedico" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Médico" />
+            <Label fx:id="lbPsicologo" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Psicologo" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="635.0" prefWidth="1066.0" BorderPane.alignment="CENTER">
+         <children>
+            <ListView fx:id="listViewMedicos" VBox.vgrow="ALWAYS" />
+            <ListView fx:id="listViewPsicologos" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ListView>
+            <HBox fx:id="hboxMedico" prefHeight="100.0">
+               <children>
+                  <VBox minWidth="-Infinity" prefHeight="370.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons/doctor.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" text="Informações do Médico (Cadastrar)" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Nome do Médico, Dr(a):" />
+                              <TextField fx:id="tfNomeMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="25.0" prefWidth="794.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="CPF:" />
+                              <TextField fx:id="tfCpfMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Data Nasc." />
+                              <DatePicker fx:id="dateNascimentoMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="461.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="E-mail:" />
+                              <TextField fx:id="tfEmailMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Sexo:" />
+                              <RadioButton fx:id="rbFemininoMedico" mnemonicParsing="false" text="F">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="sexo" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="rbMasculinoMedico" mnemonicParsing="false" text="M" toggleGroup="$sexo" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="25.0" prefWidth="492.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Especialidade:" />
+                              <TextField fx:id="tfEspecialidadeMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Telefone" />
+                              <TextField fx:id="tfTelefoneMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="CRM:" />
+                              <TextField fx:id="tfCrmMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="UF CRM:" />
+                              <TextField fx:id="tfUfCrm" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="RG:" />
+                              <TextField fx:id="tfRgMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="UF RG:" />
+                              <TextField fx:id="tfUfRg" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox minWidth="-Infinity" prefHeight="370.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons/local.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" text="Endereço" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label prefWidth="140.0" text="Logradouro:" />
+                              <TextField fx:id="tfLogradouroMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                           <children>
+                              <Label prefWidth="140.0" text="Número:" />
+                              <TextField fx:id="tfNumeroEnderecoMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label prefWidth="140.0" text="Bairro:" />
+                              <TextField fx:id="tfBairroEnderecoMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label prefWidth="140.0" text="Complemento" />
+                              <TextField fx:id="tfComplementoEnderecoMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label prefWidth="140.0" text="CEP:" />
+                              <TextField fx:id="tfCepEnderecoMedico" minWidth="-Infinity" prefWidth="200.0">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Button fx:id="btnValidadeCepMedico" minWidth="60.0" mnemonicParsing="false" text="Validar" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label prefWidth="140.0" text="Cidade:" />
+                              <TextField fx:id="tfCidadeEnderecoMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label prefWidth="140.0" text="UF:" />
+                              <TextField fx:id="tfUfEnderecoMedico" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox fx:id="hboxPsicologo" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons/psychology.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" text="Informações do Psicologo (Cadastrar)" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Nome do Psicologo(a):" />
+                              <TextField fx:id="tfNomePsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="CPF:" />
+                              <TextField fx:id="tfCpfPsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Data Nasc." />
+                              <DatePicker fx:id="dataNascimentoPsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="E-mail:" />
+                              <TextField fx:id="tfEmailPsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Sexo:" />
+                              <RadioButton fx:id="rbFemininoPsicologo" mnemonicParsing="false" text="F">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </RadioButton>
+                              <RadioButton fx:id="rbMasculinoPsicologo" mnemonicParsing="false" text="M" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Especialidade:" />
+                              <TextField fx:id="tfEspecialidadePsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Telefone" />
+                              <TextField fx:id="tfTelefonePsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox minWidth="-Infinity" prefHeight="100.0" prefWidth="140.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="CRP:" />
+                              <TextField fx:id="tfCrpPsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="UF CRP:" />
+                              <TextField fx:id="tfUfCrpPsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="RG:" />
+                              <TextField fx:id="tfRgPsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="UF RG:" />
+                              <TextField fx:id="tfUfRgPsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons/local.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" text="Endereço" textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Logradouro:" />
+                              <TextField fx:id="tfLogradouroEnderecoPsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Número:" />
+                              <TextField fx:id="tfNumeroEnderecoPsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Bairro:" />
+                              <TextField minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Complemento" />
+                              <TextField fx:id="tfComplementoEnderecopsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="CEP:" />
+                              <TextField fx:id="tfCepEnderecoPsicologo" minWidth="-Infinity" prefWidth="200.0">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </TextField>
+                              <Button fx:id="btnValidaCepPsicologo" minWidth="60.0" mnemonicParsing="false" text="Validar" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="Cidade:" />
+                              <TextField fx:id="tfCidadeEnderecoPsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label minWidth="-Infinity" prefWidth="140.0" text="UF:" />
+                              <TextField fx:id="tfUfEnderecoPsicologo" minWidth="-Infinity" prefWidth="200.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding></VBox>
+   </center>
+   <right>
+      <VBox maxWidth="-Infinity" minWidth="150.0" prefHeight="200.0" prefWidth="150.0" BorderPane.alignment="CENTER" />
+   </right>
+</BorderPane>

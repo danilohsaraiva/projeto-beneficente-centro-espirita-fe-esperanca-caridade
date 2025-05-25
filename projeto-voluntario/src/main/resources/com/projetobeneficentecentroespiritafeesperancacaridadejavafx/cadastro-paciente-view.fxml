@@ -10,6 +10,7 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
@@ -25,13 +26,13 @@
             <menus>
                 <Menu mnemonicParsing="false" text="Paciente">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Buscar" />
-                        <MenuItem mnemonicParsing="false" text="Cadastrar" />
+                        <MenuItem mnemonicParsing="false" onAction="#telaBuscaPaciente" text="Buscar" />
+                        <MenuItem mnemonicParsing="false" onAction="#telaCadastraPaciente" text="Cadastrar" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Atendimento">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Agendar" />
+                        <MenuItem mnemonicParsing="false" onAction="#telaAgendamento" text="Agendar" />
                         <MenuItem mnemonicParsing="false" text="Visualizar Agendamento" />
                     </items>
                 </Menu>
@@ -45,6 +46,11 @@
                         <MenuItem mnemonicParsing="false" text="Visualizar Consultas Agendadas" />
                     </items>
                 </Menu>
+            <Menu mnemonicParsing="false" text="Admin">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#telaAdmin" text="Gestão" />
+              </items>
+            </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Sobre" />
@@ -53,397 +59,522 @@
             </menus>
         </MenuBar>
     </top>
-    <center>
-        <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-            <children>
-                <VBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" prefHeight="692.0" prefWidth="615.0">
-                    <children>
-                        <Label maxWidth="1.7976931348623157E308" text="Dados Pessoais">
-                            <VBox.margin>
-                                <Insets bottom="15.0" top="10.0" />
-                            </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                        </Label>
-                        <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="25.0" prefHeight="30.0" prefWidth="203.0">
-                            <children>
-                        <Label fx:id="lbCpf" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" prefWidth="200.0" text="CPF:">
-                           <padding>
-                              <Insets right="10.0" />
-                           </padding>
-                        </Label>
-                                <TextField fx:id="tfCpf" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                                <Button fx:id="btnBuscar" mnemonicParsing="false" text="Validar">
-                                    <HBox.margin>
-                                        <Insets left="20.0" />
-                                    </HBox.margin>
-                                </Button>
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                            <children>
-                        <Label fx:id="lbNomeCompleto" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" prefWidth="200.0" text="Nome:">
-                           <padding>
-                              <Insets right="10.0" />
-                           </padding>
-                        </Label>
-                                <TextField fx:id="tfNome" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbRg" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" prefWidth="200.0" text="RG:">
-                                    <padding>
-                                        <Insets right="10.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfRg" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="170.0">
-                            <children>
-                                <Label fx:id="lbUfRg" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="UF:">
-                                    <padding>
-                                        <Insets right="10.0" />
-                                    </padding>
-                                </Label>
-                        <ComboBox fx:id="cbUfRg" prefWidth="70.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbDataNascimento" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Data Nasc:">
-                                    <padding>
-                                        <Insets right="10.0" />
-                                    </padding>
-                                </Label>
-                        <DatePicker fx:id="dpDataNascimento" maxHeight="25.0" minHeight="25.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbTelefone" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Telefone:">
-                                    <padding>
-                                        <Insets right="10.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfTelefone" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbCartaoSus" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Cartão SUS:">
-                                    <padding>
-                                        <Insets right="10.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfCartaoSus" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbSexo" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Sexo:">
-                                    <padding>
-                                        <Insets right="10.0" />
-                                    </padding>
-                                </Label>
-                        <HBox maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0">
-                           <children>
-                              <RadioButton fx:id="rBtnF" mnemonicParsing="false" text="F">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="sexo" />
-                                 </toggleGroup>
-                              </RadioButton>
-                              <RadioButton fx:id="rBtnM" mnemonicParsing="false" text="M" toggleGroup="$sexo" />
-                           </children>
-                        </HBox>
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="583.0">
-                            <children>
-                                <Label fx:id="lbGenero" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Gênero">
-                                    <padding>
-                                        <Insets right="10.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfGenero" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbRaca" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Raça:">
-                                    <padding>
-                                        <Insets right="10.0" />
-                                    </padding>
-                                </Label>
-                        <ComboBox fx:id="cbRaca" maxHeight="25.0" minHeight="25.0" prefHeight="25.0" prefWidth="248.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbNaturalidade" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Naturalidade:">
-                                    <padding>
-                                        <Insets right="10.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfNaturalidade" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="639.0">
-                            <children>
-                                <Label fx:id="lbNacionalidade" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Nacionalidade:">
-                                    <padding>
-                                        <Insets left="40.0" right="10.0" top="5.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfNacionalidade" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbEstadoCivil" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Estado Cívil:">
-                                    <padding>
-                                        <Insets left="40.0" right="10.0" top="5.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfEstadoCivil" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbEmail" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Email:">
-                                    <padding>
-                                        <Insets right="10.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfEmail" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                  <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                     <children>
-                        <Label fx:id="lbEscolaridade" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Escolaridade:">
-                           <padding>
-                              <Insets right="10.0" />
-                           </padding>
-                        </Label>
-                        <TextField fx:id="tfEscolaridade" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                     </children>
-                  </HBox>
-                  <HBox maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                     <children>
-                        <Label fx:id="lbOcupacao" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Ocupação:">
-                           <padding>
-                              <Insets right="10.0" />
-                           </padding>
-                        </Label>
-                        <TextField fx:id="tfOcupacao" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                     <children>
-                        <Label fx:id="lbQuestionaDeficiencia" alignment="CENTER" maxHeight="30.0" maxWidth="1.7976931348623157E308" minHeight="30.0" text="Possuí alguma deficiência?">
-                           <padding>
-                              <Insets right="10.0" />
-                           </padding>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Label>
-                        <CheckBox fx:id="cbSim" alignment="CENTER" mnemonicParsing="false" text="Sim" />
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="15.0" top="10.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox fx:id="hBoxDeficiencia" maxHeight="-Infinity" minHeight="30.0" prefHeight="30.0" prefWidth="587.0">
-                     <children>
-                        <Label fx:id="lbTipoDeficiencia" alignment="CENTER_RIGHT" maxHeight="71.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" prefHeight="71.0" prefWidth="200.0" text="Tipo: ">
-                           <padding>
-                              <Insets right="10.0" />
-                           </padding>
-                        </Label>
-                        <CheckBox fx:id="cbCognitiva" mnemonicParsing="false" text="Cognitiva" />
-                        <CheckBox fx:id="cbLocomocao" mnemonicParsing="false" text="Locomoção" />
-                        <CheckBox fx:id="cbVisao" mnemonicParsing="false" text="Visão" />
-                        <CheckBox fx:id="cbAudicao" mnemonicParsing="false" text="Audição" />
-                     </children>
-                  </HBox>
-                  <HBox fx:id="hBoxDeficienciaOutros" maxHeight="-Infinity" minHeight="25.0" prefHeight="30.0" prefWidth="200.0">
-                     <children>
-                        <Label alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Outro:">
-                           <padding>
-                              <Insets right="10.0" />
-                           </padding>
-                        </Label>
-                        <TextField fx:id="tfDeficienciaOutro" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                     </children>
-                  </HBox>
-                    </children>
-                    <HBox.margin>
-                        <Insets top="20.0" />
-                    </HBox.margin>
-                </VBox>
-                <VBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" prefHeight="692.0" prefWidth="641.0">
-                    <children>
-                        <Label maxWidth="1.7976931348623157E308" text="Endereço">
-                            <VBox.margin>
-                                <Insets bottom="15.0" top="10.0" />
-                            </VBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                        </Label>
-                        <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbCep" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="CEP:">
-                                    <padding>
-                                        <Insets left="40.0" right="10.0" top="5.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfCep" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                                <Button fx:id="btnValidarCep" mnemonicParsing="false" text="Validar">
-                                    <HBox.margin>
-                                        <Insets left="20.0" />
-                                    </HBox.margin>
-                                </Button>
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbEndereco" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Endereço:">
-                                    <padding>
-                                        <Insets left="40.0" right="10.0" top="5.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfEndereco" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbNumero" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Número:">
-                                    <padding>
-                                        <Insets left="40.0" right="10.0" top="5.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfNumero" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbBairro" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Bairro:">
-                                    <padding>
-                                        <Insets left="40.0" right="10.0" top="5.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfBairro" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbComplemento" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Complemento:">
-                                    <padding>
-                                        <Insets left="40.0" right="10.0" top="5.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfComplemento" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbCidade" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Cidade:">
-                                    <padding>
-                                        <Insets left="40.0" right="10.0" top="5.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfCidade" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                        <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbUfCidade" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="UF:">
-                                    <padding>
-                                        <Insets left="40.0" right="10.0" top="5.0" />
-                                    </padding>
-                                </Label>
-                        <ComboBox fx:id="cbUfEndereco" prefWidth="70.0" />
-                            </children>
-                        </HBox>
-                        <Label maxWidth="1.7976931348623157E308" text="Contato de Emergência">
-                            <VBox.margin>
-                                <Insets bottom="15.0" top="10.0" />
-                            </VBox.margin>
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                        </Label>
-                  <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
-                     <children>
-                                <Label fx:id="lbTelefoneContatoEmergencia" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Telefone:">
-                                    <padding>
-                                        <Insets left="40.0" right="10.0" top="5.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfTelefoneEmergencia" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                        <ImageView fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/icons/more.png" />
-                           </image>
-                           <HBox.margin>
-                              <Insets left="20.0" />
-                           </HBox.margin>
-                        </ImageView>
-                     </children>
-                  </HBox>
-                        <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
-                     <children>
-                        <Label fx:id="lbNomeContatoEmergencia" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Nome:">
-                           <padding>
-                              <Insets left="40.0" right="10.0" top="5.0" />
-                           </padding>
-                        </Label>
-                        <TextField fx:id="tfNomeContatoEmergencia" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                     </children>
-                        </HBox>
-                        <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
-                            <children>
-                                <Label fx:id="lbOutroContatoEmergencia" alignment="CENTER_RIGHT" maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Outro:">
-                                    <padding>
-                                        <Insets left="40.0" right="10.0" top="5.0" />
-                                    </padding>
-                                </Label>
-                                <TextField fx:id="tfOutroEmergencia" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
-                            </children>
-                        </HBox>
-                    </children>
-                    <HBox.margin>
-                        <Insets top="20.0" />
-                    </HBox.margin>
-                </VBox>
-            </children>
-        </HBox>
-    </center>
     <bottom>
-        <HBox alignment="BOTTOM_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <HBox alignment="BOTTOM_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="btnAdicionarPaciente" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#add" text="Adicionar">
+            <Button fx:id="btnCancela" mnemonicParsing="false" onMouseClicked="#cancelaCadastroPaciente" text="Cancelar">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+                <Button fx:id="btnAdicionarPaciente" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#adicionaPaciente" text="Adicionar">
                     <HBox.margin>
-                        <Insets bottom="30.0" right="30.0" />
+                        <Insets left="10.0" />
                     </HBox.margin>
                 </Button>
             </children>
             <BorderPane.margin>
                 <Insets />
             </BorderPane.margin>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
         </HBox>
     </bottom>
-   <left>
-      <VBox maxWidth="125.0" minWidth="125.0" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <VBox maxWidth="125.0" minWidth="125.0" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </right>
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" BorderPane.alignment="CENTER">
+         <content>
+            <HBox prefHeight="758.0" prefWidth="1090.0">
+               <children>
+                      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="321.0" HBox.hgrow="ALWAYS">
+                          <children>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons/patient.png" />
+                           </image>
+                        </ImageView>
+                              <Label contentDisplay="CENTER" text="Dados Pessoais" textAlignment="CENTER">
+                                  <VBox.margin>
+                                      <Insets bottom="10.0" />
+                                  </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                              </Label>
+                        <HBox layoutX="10.0" layoutY="123.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="lbCpf" maxWidth="130.0" minWidth="130.0" prefWidth="200.0" text="CPF:">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="tfCpf" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                              <Button fx:id="btnBuscar" mnemonicParsing="false" text="Validar">
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                              <HBox prefWidth="200.0">
+                                  <children>
+                              <Label fx:id="lbNomeCompleto" maxWidth="130.0" minWidth="130.0" prefWidth="200.0" text="Nome:">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                                      <TextField fx:id="tfNome" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox minHeight="25.0" prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbRg" maxWidth="130.0" minWidth="130.0" prefWidth="200.0" text="RG:">
+                                          <padding>
+                                              <Insets right="10.0" />
+                                          </padding>
+                                      </Label>
+                                      <TextField fx:id="tfRg" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox minHeight="25.0" prefWidth="170.0">
+                                  <children>
+                                      <Label fx:id="lbUfRg" maxWidth="130.0" minWidth="130.0" text="UF:">
+                                          <padding>
+                                              <Insets right="10.0" />
+                                          </padding>
+                                      </Label>
+                              <ComboBox fx:id="cbUfRg" prefWidth="70.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbDataNascimento" maxWidth="130.0" minWidth="130.0" text="Data Nasc:">
+                                          <padding>
+                                              <Insets right="10.0" />
+                                          </padding>
+                                      </Label>
+                              <DatePicker fx:id="dpDataNascimento" maxHeight="25.0" minHeight="25.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbTelefone" maxWidth="130.0" minWidth="130.0" text="Telefone:">
+                                          <padding>
+                                              <Insets right="10.0" />
+                                          </padding>
+                                      </Label>
+                                      <TextField fx:id="tfTelefone" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbCartaoSus" maxWidth="130.0" minWidth="130.0" text="Cartão SUS:">
+                                          <padding>
+                                              <Insets right="10.0" />
+                                          </padding>
+                                      </Label>
+                                      <TextField fx:id="tfCartaoSus" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbSexo" maxWidth="130.0" minWidth="130.0" text="Sexo:">
+                                          <padding>
+                                              <Insets right="10.0" />
+                                          </padding>
+                                      </Label>
+                              <HBox maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0">
+                                 <children>
+                                    <RadioButton fx:id="rBtnF" mnemonicParsing="false" text="F">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="sexo" />
+                                       </toggleGroup>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </RadioButton>
+                                    <RadioButton fx:id="rBtnM" mnemonicParsing="false" text="M" toggleGroup="$sexo" />
+                                 </children>
+                              </HBox>
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox>
+                                  <children>
+                                      <Label fx:id="lbGenero" maxWidth="130.0" minWidth="130.0" text="Gênero">
+                                          <padding>
+                                              <Insets right="10.0" />
+                                          </padding>
+                                      </Label>
+                                      <TextField fx:id="tfGenero" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbRaca" maxWidth="130.0" minWidth="130.0" text="Raça:">
+                                          <padding>
+                                              <Insets right="10.0" />
+                                          </padding>
+                                      </Label>
+                              <ComboBox fx:id="cbRaca" maxHeight="25.0" minHeight="25.0" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbNaturalidade" maxWidth="130.0" minWidth="130.0" text="Naturalidade:">
+                                          <padding>
+                                              <Insets right="10.0" />
+                                          </padding>
+                                      </Label>
+                                      <TextField fx:id="tfNaturalidade" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                        <HBox layoutX="10.0" layoutY="410.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="lbNacionalidade" maxWidth="130.0" minWidth="130.0" text="Nascionalidade:">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="tfNacionalidade" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox layoutX="10.0" layoutY="443.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="lbEstadoCivil" maxWidth="130.0" minWidth="130.0" text="Estado Cívil:">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="tfEstadoCivil" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                              <HBox prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbEmail" maxWidth="130.0" minWidth="130.0" text="Email:">
+                                          <padding>
+                                              <Insets right="10.0" />
+                                          </padding>
+                                      </Label>
+                                      <TextField fx:id="tfEmail" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label fx:id="lbEscolaridade" maxWidth="130.0" minWidth="130.0" text="Escolaridade:">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="tfEscolaridade" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox prefWidth="200.0">
+                           <children>
+                              <Label fx:id="lbOcupacao" maxHeight="30.0" maxWidth="130.0" minHeight="30.0" minWidth="130.0" text="Ocupação:">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="tfOcupacao" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="lbQuestionaDeficiencia" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Possuí alguma deficiência?">
+                                 <padding>
+                                    <Insets right="10.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <CheckBox fx:id="cbSim" alignment="CENTER" mnemonicParsing="false" text="Sim" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox fx:id="hBoxDeficiencia" alignment="CENTER_LEFT">
+                           <children>
+                              <VBox prefWidth="100.0">
+                                 <children>
+                                    <Label fx:id="lbTipoDeficiencia" maxWidth="130.0" minWidth="125.0" prefWidth="200.0" text="Tipo: ">
+                                       <padding>
+                                          <Insets right="10.0" />
+                                       </padding>
+                                       <VBox.margin>
+                                          <Insets bottom="3.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <CheckBox fx:id="cbCognitiva" mnemonicParsing="false" text="Cognitiva">
+                                       <VBox.margin>
+                                          <Insets bottom="3.0" />
+                                       </VBox.margin></CheckBox>
+                                    <CheckBox fx:id="cbLocomocao" mnemonicParsing="false" text="Locomoção">
+                                       <VBox.margin>
+                                          <Insets bottom="3.0" />
+                                       </VBox.margin></CheckBox>
+                                    <CheckBox fx:id="cbVisao" mnemonicParsing="false" text="Visão">
+                                       <VBox.margin>
+                                          <Insets bottom="3.0" />
+                                       </VBox.margin></CheckBox>
+                                    <CheckBox fx:id="cbAudicao" mnemonicParsing="false" text="Audição">
+                                       <VBox.margin>
+                                          <Insets bottom="3.0" />
+                                       </VBox.margin></CheckBox>
+                                    <HBox fx:id="hBoxDeficienciaOutros" alignment="CENTER_LEFT" prefWidth="200.0">
+                                       <children>
+                                          <Label maxHeight="30.0" maxWidth="125.0" minHeight="30.0" minWidth="125.0" text="Outro:">
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                          </Label>
+                                          <TextField fx:id="tfDeficienciaOutro" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets bottom="3.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                          </children>
+                      </VBox>
+                      <VBox maxWidth="1.7976931348623157E308" prefHeight="394.0" HBox.hgrow="ALWAYS">
+                          <children>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/icons/local.png" />
+                           </image>
+                        </ImageView>
+                              <Label text="Endereço">
+                                  <VBox.margin>
+                                      <Insets bottom="10.0" />
+                                  </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                              </Label>
+                              <HBox maxHeight="30.0" maxWidth="1.7976931348623157E308" minHeight="30.0">
+                                  <children>
+                                      <Label fx:id="lbCep" alignment="TOP_LEFT" maxWidth="130.0" minWidth="130.0" text="CEP:">
+                                          <padding>
+                                              <Insets left="40.0" right="10.0" top="5.0" />
+                                          </padding>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                      </Label>
+                                      <TextField fx:id="tfCep" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                      <Button fx:id="btnValidarCep" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Validar">
+                                          <HBox.margin>
+                                              <Insets left="20.0" />
+                                          </HBox.margin>
+                                      </Button>
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox maxHeight="25.0" maxWidth="1.7976931348623157E308" minHeight="30.0" prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbEndereco" maxWidth="130.0" minWidth="130.0" text="Endereço:">
+                                          <padding>
+                                              <Insets left="40.0" right="10.0" top="5.0" />
+                                          </padding>
+                                      </Label>
+                                      <TextField fx:id="tfEndereco" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbNumero" maxWidth="130.0" minWidth="130.0" text="Número:">
+                                          <padding>
+                                              <Insets left="40.0" right="10.0" top="5.0" />
+                                          </padding>
+                                      </Label>
+                                      <TextField fx:id="tfNumero" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbBairro" maxWidth="130.0" minWidth="130.0" text="Bairro:">
+                                          <padding>
+                                              <Insets left="40.0" right="10.0" top="5.0" />
+                                          </padding>
+                                      </Label>
+                                      <TextField fx:id="tfBairro" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbComplemento" maxWidth="130.0" minWidth="130.0" text="Complemento:">
+                                          <padding>
+                                              <Insets left="40.0" right="10.0" top="5.0" />
+                                          </padding>
+                                      </Label>
+                                      <TextField fx:id="tfComplemento" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbCidade" maxWidth="130.0" minWidth="130.0" text="Cidade:">
+                                          <padding>
+                                              <Insets left="40.0" right="10.0" top="5.0" />
+                                          </padding>
+                                      </Label>
+                                      <TextField fx:id="tfCidade" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbUfCidade" maxWidth="130.0" minWidth="130.0" text="UF:">
+                                          <padding>
+                                              <Insets left="40.0" right="10.0" top="5.0" />
+                                          </padding>
+                                      </Label>
+                              <ComboBox fx:id="cbUfEndereco" prefWidth="70.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <Label text="Contato de Emergência">
+                                  <VBox.margin>
+                                      <Insets bottom="15.0" top="10.0" />
+                                  </VBox.margin>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                              </Label>
+                        <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
+                           <children>
+                                      <Label fx:id="lbTelefoneContatoEmergencia" maxWidth="130.0" minWidth="130.0" text="Telefone:">
+                                          <padding>
+                                              <Insets left="40.0" right="10.0" top="5.0" />
+                                          </padding>
+                                      </Label>
+                                      <TextField fx:id="tfTelefoneEmergencia" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                              <ImageView fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/icons/more.png" />
+                                 </image>
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </ImageView>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                              <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="lbNomeContatoEmergencia" maxWidth="130.0" minWidth="130.0" text="Nome:">
+                                 <padding>
+                                    <Insets left="40.0" right="10.0" top="5.0" />
+                                 </padding>
+                              </Label>
+                              <TextField fx:id="tfNomeContatoEmergencia" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                              <HBox maxHeight="25.0" minHeight="30.0" prefWidth="200.0">
+                                  <children>
+                                      <Label fx:id="lbOutroContatoEmergencia" maxWidth="130.0" minWidth="130.0" text="Outro:">
+                                          <padding>
+                                              <Insets left="40.0" right="10.0" top="5.0" />
+                                          </padding>
+                                      </Label>
+                                      <TextField fx:id="tfOutroEmergencia" maxHeight="25.0" maxWidth="250.0" minHeight="25.0" minWidth="250.0" />
+                                  </children>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                              </HBox>
+                          </children>
+                      </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </HBox>
+         </content>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </ScrollPane>
+   </center>
 </BorderPane>

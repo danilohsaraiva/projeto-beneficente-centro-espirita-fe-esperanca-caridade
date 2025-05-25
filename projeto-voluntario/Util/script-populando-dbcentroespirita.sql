@@ -105,47 +105,20 @@ VALUES
 
 
 -- Inserções para a tabela Psicologo
-INSERT INTO `dbcentroespirita`.`Psicologo` (`id_psicologo`, `nome_psicologo`, `data_nascimento_profissional`, `sexo_psicologo`, `fk_endereco`, `telefone_psicologo`, `email`, `crp`, `uf_registro_crp`, `especialidade`, `fk_usuario`, `rg_psicologo`, `ur_rg`, `tipo_atendimento`)
+INSERT INTO `dbcentroespirita`.`Psicologo` (`id_psicologo`, `nome_psicologo`, `data_nascimento_profissional`, `sexo_psicologo`, `fk_endereco`, `telefone_psicologo`, `email`, `crp`, `uf_registro_crp`, `especialidade`, `fk_usuario`, `rg_psicologo`, `ur_rg`)
 VALUES
-(1, 'Psic. Marcos Pereira', '1988-04-10 00:00:00', 'M', 6, '(31) 94444-3333', 'marcos.pereira@clinic.com', '45678', 'MG', 'Terapia Cognitiva', 6, 'MG6789012', 'MG', 'Individual'),
-(2, 'Psic. Clara Souza', '1992-09-18 00:00:00', 'F', 7, '(31) 93333-2222', 'clara.souza@clinic.com', '98761', 'SP', 'Psicologia Infantil', 7, 'SP7890123', 'SP', 'Familiar'),
-(3, 'Psic. Roberto Lima', '1980-11-22 00:00:00', 'M', 8, '(31) 92222-1111', 'roberto.lima@clinic.com', '12398', 'RJ', 'Psicoterapia', 8, 'RJ8901234', 'RJ', 'Grupo'),
-(4, 'Psic. Juliana Martins', '1985-06-05 00:00:00', 'F', 9, '(31) 91111-0000', 'juliana.martins@clinic.com', '34987', 'RS', 'Terapia de Casal', 9, 'RS9012345', 'RS', 'Casal'),
-(5, 'Psic. Thiago Santos', '1995-08-12 00:00:00', 'M', 10, '(31) 90000-5555', 'thiago.santos@clinic.com', '76432', 'ES', 'Psicologia Comportamental', 10, 'ES0123456', 'ES', 'Individual');
+(1, 'Psic. Marcos Pereira', '1988-04-10 00:00:00', 'M', 6, '(31) 94444-3333', 'marcos.pereira@clinic.com', '45678', 'MG', 'Terapia Cognitiva', 6, 'MG6789012', 'MG'),
+(2, 'Psic. Clara Souza', '1992-09-18 00:00:00', 'F', 7, '(31) 93333-2222', 'clara.souza@clinic.com', '98761', 'SP', 'Psicologia Infantil', 7, 'SP7890123', 'SP'),
+(3, 'Psic. Roberto Lima', '1980-11-22 00:00:00', 'M', 8, '(31) 92222-1111', 'roberto.lima@clinic.com', '12398', 'RJ', 'Psicoterapia', 8, 'RJ8901234', 'RJ'),
+(4, 'Psic. Juliana Martins', '1985-06-05 00:00:00', 'F', 9, '(31) 91111-0000', 'juliana.martins@clinic.com', '34987', 'RS', 'Terapia de Casal', 9, 'RS9012345', 'RS'),
+(5, 'Psic. Thiago Santos', '1995-08-12 00:00:00', 'M', 10, '(31) 90000-5555', 'thiago.santos@clinic.com', '76432', 'ES', 'Psicologia Comportamental', 10, 'ES0123456', 'ES');
 
--- Inserções para a tabela AnamneseAtendimentoPsicologico
-INSERT INTO `dbcentroespirita`.`AnamneseAtendimentoPsicologico` 
-(`id_anamnese_psicologico`, `motivo_consulta_descricao`, `tempo_sintomas`, `fatores_agravantes`, `medicamentos_uso`) 
-VALUES 
-(1, 'Ansiedade Generalizada', '6 meses', 'Estresse no trabalho', 'Fluoxetina'),
-(2, 'Depressão Moderada', '2 anos', 'Perda de um familiar', 'Sertralina'),
-(3, 'Transtorno Obsessivo Compulsivo', '1 ano', 'Preocupações constantes', 'Paroxetina'),
-(4, 'Síndrome do Pânico', '3 meses', 'Exposição a situações de pressão', 'Escitalopram'),
-(5, 'Estresse pós-traumático', '4 anos', 'Acidente de carro', 'Venlafaxina');
 
--- Inserções para a tabela AnamneseAtendimentoClinico
-INSERT INTO `dbcentroespirita`.`AnamneseAtendimendoClinico` 
-(`id_anamnese_clinico`, `motivo_consulta_descricao`, `tempo_sintomas`, `sintomas_assossiados`, `tratamento_anteriores`, `uso_medicamento`) 
-VALUES 
-(1, 'Dor abdominal', '2024-12-01 09:00:00', 'Náusea, febre', 'Antibióticos para infecção', 'Omeprazol'),
-(2, 'Hipertensão', '2024-12-02 10:00:00', 'Dor de cabeça, tontura', 'Monitoramento de pressão', 'Losartana'),
-(3, 'Asma', '2024-12-03 11:30:00', 'Falta de ar, tosse', 'Uso de inaladores', 'Salbutamol'),
-(4, 'Diabetes Tipo 2', '2024-12-04 14:00:00', 'Fadiga, sede excessiva', 'Controle glicêmico', 'Metformina'),
-(5, 'Artrite reumatoide', '2024-12-05 15:30:00', 'Dor nas articulações', 'Fisioterapia', 'Methotrexato');
 
--- Inserções para a tabela Atendimento
-INSERT INTO `dbcentroespirita`.`Atendimento` 
-(`id_atendimento`, `fk_prontuario`, `tipo_atendimento`, `prioridade`, `status_atendimento`, `tratamento`, `diagnostico`, `observacao`) 
-VALUES
-(1, 1, 0, 'Emergência', 'Concluído', 'Sutura na mão direita', 'Laceração por objeto cortante', 'Paciente atendido no mesmo dia'),
-(2, 2, 1, 'Muito urgente', 'Em Aguardo', 'Nebulização com broncodilatador', 'Crise asmática', 'Paciente com histórico de asma'),
-(3, 3, 0, 'Urgente', 'Pendente', 'Analgésicos e anti-inflamatórios', 'Cefaleia tensional', 'Relatou dores frequentes na região frontal'),
-(4, 4, 1, 'Pouco urgente', 'Cancelado', NULL, NULL, 'Paciente desmarcou o atendimento'),
-(5, 5, 0, 'Não Urgente', 'Concluído', 'Ajuste de medicação', 'Hipertensão controlada', 'Consulta de rotina realizada'),
-(6, 1, 1, 'Emergência', 'Não Compareceu', NULL, NULL, 'Paciente faltou sem aviso prévio'),
-(7, 2, 0, 'Muito urgente', 'Concluído', 'Troca de curativo', 'Ferida superficial cicatrizando', 'Paciente respondeu bem ao tratamento'),
-(8, 3, 1, 'Urgente', 'Reaberto', 'Exames laboratoriais solicitados', 'Suspeita de anemia', 'Aguardando resultados dos exames'),
-(9, 4, 0, 'Pouco urgente', 'Concluído', 'Consulta psicológica', 'Ansiedade leve', 'Encaminhado para acompanhamento mensal'),
-(10, 5, 1, 'Não Urgente', 'Concluído', 'Revisão clínica sem intervenções', 'Saúde geral estável', 'Paciente sem queixas no momento');
+
+
+
+
+
 
 

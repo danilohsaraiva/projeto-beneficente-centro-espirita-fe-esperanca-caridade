@@ -42,7 +42,6 @@ public class MainController {
                 ViewManager.getInstance().showScreen(TipoTela.PRINCIPAL);
                 ViewManager.getInstance().getSceneMain().setTitle("Bem Vindo!");
                 ViewManager.getInstance().getSceneMain().setResizable(true);
-                ViewManager.getInstance().getSceneMain().setMaximized(true);
             }
         } catch (Exception e) {
             System.out.println("Usuário/Senha Inválidos!");

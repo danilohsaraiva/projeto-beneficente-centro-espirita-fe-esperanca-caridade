@@ -24,8 +24,15 @@ public class Endereco {
     private String bairro;
     private String complemento;
     private String numero;
-    @OneToOne(mappedBy = "endereco")
+
+    @OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL)
     private Paciente paciente;
+
+    @OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL)
+    private Medico medico;
+
+    @OneToOne(mappedBy = "endereco", cascade = CascadeType.ALL)
+    private Psicologo psicologo;
 
     @Override
     public String toString() {

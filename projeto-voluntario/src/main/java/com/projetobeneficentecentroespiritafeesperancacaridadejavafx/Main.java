@@ -23,8 +23,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        List<Paciente> pacientes = PacienteDao.buscaPacientes("a");
-        System.out.println(pacientes);
 
         try {
             ViewManager viewManager = ViewManager.getInstance();
@@ -34,7 +32,9 @@ public class Main extends Application {
             viewManager.addScreen(TipoTela.PRINCIPAL, "principal-view.fxml");
             viewManager.addScreen(TipoTela.LOGIN,"hello-view.fxml");
             viewManager.addScreen(TipoTela.BUSCA_PACIENTE, "busca-paciente.fxml");
-
+            viewManager.addScreen(TipoTela.ADMIN, "admin.fxml");
+            viewManager.addScreen(TipoTela.AGENDAMENTO, "agendamento.fxml");
+            viewManager.addScreen(TipoTela.AGENDAMENTOS, "agendamentos.fxml");
 
 
 

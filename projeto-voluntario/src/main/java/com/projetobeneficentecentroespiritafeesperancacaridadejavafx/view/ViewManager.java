@@ -1,13 +1,11 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.view;
 
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.Main;
-import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.controller.MainController;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.enuns.TipoTela;
 import com.projetobeneficentecentroespiritafeesperancacaridadejavafx.model.Usuario;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import lombok.Data;
 
@@ -66,5 +64,8 @@ public class ViewManager {
             System.out.println("Tela não encontrada: " + tipo.toString());
         }
     }
-
+    public  void changeScreen(TipoTela tipoTela, String descricao) {
+        this.showScreen(tipoTela);
+        this.getSceneMain().setTitle(descricao);
+    }
 }

@@ -1,5 +1,5 @@
 package com.projetobeneficentecentroespiritafeesperancacaridadejavafx.enuns;
 
 public enum TipoTela {
-    LOGIN, PRINCIPAL, CADASTRO_PACIENTE, BUSCA_PACIENTE;
+    ADMIN, BUSCA_PACIENTE,CADASTRO_PACIENTE , LOGIN, PRINCIPAL, AGENDAMENTO, AGENDAMENTOS;
 }

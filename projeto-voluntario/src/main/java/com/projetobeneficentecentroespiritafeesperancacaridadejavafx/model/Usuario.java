@@ -18,4 +18,7 @@ public class Usuario {
     private String senha;
     @Column(name = "tipo_acesso", columnDefinition = "CHAR(3)")
     private String tipoAcesso;
+
+    @OneToOne(mappedBy = "usuario")
+    private Psicologo psicologo;
 }
